@@ -49,7 +49,7 @@
     </com.google.android.material.navigation.NavigationView>
 
 
-    
+
     <include
         layout="@layout/nav_footer"
         android:layout_width="match_parent"
