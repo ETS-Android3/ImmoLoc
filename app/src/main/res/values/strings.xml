@@ -1,0 +1,69 @@
+<resources>
+    <string name="app_name">ImmoLoc</string>
+
+    <!-- Welcome page -->
+    <string name="welcome">Bienvenue!</string>
+    <string name="welcomeDescription">Bienvenue sur LocImmo, votre\n application de recherche\n de biens immbobiliers dans\n toute la France!</string>
+    <string name="welcomeBtn">Démarrer</string>
+
+    <!-- Home page (activity_main yet) -->
+    <string name="inscriptionBtn">Inscription</string>
+    <string name="connexionBtn">Connexion</string>
+    <string name="showImmoHouses">Biens immobiliers</string>
+    <string name="title_activity_login">Login</string>
+
+    <!-- Login page -->
+    <string name="co">Connexion</string>
+    <string name="email">Email</string>
+    <string name="password">Mot de passe</string>
+    <string name="connexionBtn2">Se connecter</string>
+    <string name="forgotPassword">Mot de passe oublié?</string>
+    <string name="signupBtn1">S\'inscrire</string>
+
+    <!-- Signup page -->
+    <string name="signUpTxt">Inscription</string>
+    <string name="lastName">Nom</string>
+    <string name="firstName">Prénom</string>
+    <string name="phoneNb">Tel</string>
+    <string name="signupBtn2">Inscription</string>
+    <string name="alreadyHaveAccountBtn">Vous avez déjà un compte?</string>
+
+    <!-- Type of registration -->
+    <string name="descriptionRegistration">Choisisez le type de locataire que vous êtes</string>
+    <string name="proBtn">Professionnel</string>
+    <string name="privateBtn">Particulier</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <!-- Navigation -->
+    <string name="navigation_drawer_open">Ouvrir le navigation drawer</string>
+    <string name="navigation_drawer_close">Fermer le navigation drawer</string>
+
+    <!-- Footer -->
+    <string name="btnAccueil">Accueil</string>
+    <string name="btnRecherche">Recherche</string>
+    <string name="btnProfil">Profil</string>
+
+    <!-- Searching real estate -->
+    <string name="txtRecherche">Recherche</string>
+    <string name="typeBien">Type de bien</string>
+    <string name="ville">Ville</string>
+    <string name="dpt">Département</string>
+    <string name="region">Région</string>
+
+
+    <string-array name="typeDeBien">
+        <item>Appartement</item>
+        <item>Maison</item>
+        <item>Villa</item>
+    </string-array>
+
+
+
+
+
+</resources>
