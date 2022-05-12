@@ -41,20 +41,7 @@ public class City {
         this.department = department;
     }
 
-    /*
-    public City(String name, String zip_code, String department){
-        this.name = name;
-        this.zip_code = zip_code;
-        this.department = department;
-    }
 
-
-    public City(String name, String zip_code, String department){
-        this.name = name;
-        this.zip_code = zip_code;
-        this.department = department;
-    }
-    */
 
     public int getId(){
         return id;

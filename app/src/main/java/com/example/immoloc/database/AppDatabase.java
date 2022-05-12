@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.room.AutoMigration;
 import androidx.room.Database;
+import androidx.room.RenameColumn;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.migration.AutoMigrationSpec;
@@ -19,6 +20,7 @@ import androidx.room.migration.AutoMigrationSpec;
                 )
         }
 )
+
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();
@@ -34,6 +36,7 @@ public abstract class AppDatabase extends RoomDatabase {
         }
         return instance;
     }
+    @RenameColumn(tableName="user", fromColumnName ="id", toColumnName ="user_id")
     static class MyAutoMigration implements AutoMigrationSpec { }
 
 

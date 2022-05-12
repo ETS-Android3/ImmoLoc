@@ -1,92 +1,503 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Signup">
+    tools:context=".RealEstateListing">
 
-    <TextView
-        android:id="@+id/signUpMainTxt"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/txtRecherche"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="68dp" >
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="@string/ville" />
-
-    <EditText
-        android:id="@+id/editTextTextEmailAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:autofillHints="emailAddress"
-        android:ems="10"
-        android:hint="Entrez une ville..."
-        android:inputType="textEmailAddress"
-        android:minHeight="48dp" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Entrez une région..."
-        android:text="@string/dpt" />
-
-    <EditText
-        android:id="@+id/editTextTextPersonFirstName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:ems="10"
-        android:hint="Entrez votre prénom..."
-        android:autofillHints="name"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <Spinner
-            android:id="@+id/typeBien"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/typeBien"
-            android:minHeight="48dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.216" />
+            android:clipToPadding="true"
+            android:scrollbars="vertical">
 
-        <TextView
-            android:id="@+id/descTypeBien"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="25dp"
+                android:paddingTop="20dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="25dp">
+
+                <!-- Price Range -->
+
+                <CheckBox
+                    android:id="@+id/filter_price_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Intervalle de Prix"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="@color/grey_88" />
+
+                <!-- Probleme d'affichage à resoudre -->
+
+                <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:bar_color="@color/secondaryColor"
+                    app:bar_highlight_color="@color/red"
+                    app:data_type="_long"
+                    app:gap="100"
+                    app:left_thumb_color_pressed="@color/secondaryDarkColor"
+                    app:max_value="10000"
+                    app:min_value="0" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_medium">
+
+                    <TextView
+                        android:id="@+id/filter_price_min"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="0€"
+                        android:textColor="@color/grey_40"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/filter_price_max"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="10000€"
+                        android:textColor="@color/grey_40"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <!-- Surface Range -->
+
+
+                <CheckBox
+                    android:id="@+id/filter_surface_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:text="Surface"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="@color/grey_88" />
+
+
+                <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                    android:id="@+id/filter_surface_seekbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:bar_color="@color/grey_20"
+                    app:bar_highlight_color="@color/secondaryColor"
+                    app:data_type="_long"
+                    app:left_thumb_color="@color/secondaryColor"
+                    app:left_thumb_color_pressed="@color/secondaryDarkColor"
+                    app:max_value="500"
+                    app:min_value="0"
+                    app:right_thumb_color="@color/secondaryColor"
+                    app:right_thumb_color_pressed="@color/secondaryDarkColor" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_medium">
+
+                    <TextView
+                        android:id="@+id/filter_surface_min"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="0 m2"
+                        android:textColor="@color/grey_40"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/filter_surface_max"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="500m2"
+                        android:textColor="@color/grey_40"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                <!-- Nbs Photos -->
+                <!--PHOTOS-->
+
+                <CheckBox
+                    android:id="@+id/filter_photo_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:text="Photo(s)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="@color/grey_88" />
+
+
+                <SeekBar
+                    android:id="@+id/filter_photo_seekbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:bar_color="@color/grey_20"
+                    app:bar_highlight_color="@color/secondaryColor"
+                    app:data_type="_integer"
+                    app:left_thumb_color="@color/secondaryColor"
+                    app:left_thumb_color_pressed="@color/secondaryDarkColor"
+                    app:right_thumb_color="@color/secondaryColor"
+                    app:right_thumb_color_pressed="@color/secondaryDarkColor"
+                    app:steps="1" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_medium">
+
+                    <TextView
+                        android:id="@+id/filter_photo_min"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/grey_40"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/filter_photo_max"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/grey_40"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <!--     AVAILABLE       -->
+
+                <CheckBox
+                    android:id="@+id/filter_available_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:text="Disponibilités"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="@color/grey_88" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/filter_available_from_check"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_mxlarge"
+                        android:text="date début"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:startIconDrawable="@drawable/ic_date_range_black_24dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/filter_available_to_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusableInTouchMode="false"
+                            android:inputType="none" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                <!-- Sold -->
+                <!--     SOLD      -->
+
+                <CheckBox
+                    android:id="@+id/filter_sold_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:text="Période de Location"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="@color/grey_88"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/filter_sold_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/filter_sold_after_check"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        android:text="date début"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:startIconDrawable="@drawable/ic_date_range_black_24dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/filter_sold_after_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusableInTouchMode="false"
+                            android:inputType="none"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_middle">
+
+                    <CheckBox
+                        android:id="@+id/filter_sold_before_check"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        android:text="date fin"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:startIconDrawable="@drawable/ic_date_range_black_24dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/filter_sold_before_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusableInTouchMode="false"
+                            android:inputType="none" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <!-- Near -->
+
+
+                <TextView
+                    android:id="@+id/filter_near_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:text="A proximité de"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="@color/grey_88" />
+
+
+                <com.google.android.flexbox.FlexboxLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_mxlarge"
+                    android:layout_marginBottom="@dimen/spacing_mxlarge"
+                    app:flexWrap="wrap"
+                    app:justifyContent="flex_start">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/filter_near_center"
+                        android:layout_width="85dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/default_margin"
+                        android:background="@drawable/near_btn_selector"
+                        android:padding="2dp"
+                        android:text="Centre Ville"
+                        android:textAllCaps="false"
+                        android:textColor="@color/grey_40"
+                        android:textSize="12sp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/filter_near_restaurants"
+                        android:layout_width="85dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/default_margin"
+                        android:background="@drawable/near_btn_selector"
+                        android:text="Restaurants Proches"
+                        android:textAllCaps="false"
+                        android:textColor="@color/grey_40"
+                        android:textSize="12sp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/filter_near_train"
+                        android:layout_width="85dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/default_margin"
+                        android:background="@drawable/near_btn_selector"
+                        android:padding="2dp"
+                        android:text="Stations Proches"
+                        android:textAllCaps="false"
+                        android:textColor="@color/grey_40"
+                        android:textSize="12sp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/filter_near_commerce"
+                        android:layout_width="85dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:layout_marginEnd="@dimen/default_margin"
+                        android:background="@drawable/near_btn_selector"
+                        android:padding="2dp"
+                        android:text="Commerce"
+                        android:textAllCaps="false"
+                        android:textColor="@color/grey_40"
+                        android:textSize="12sp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/filter_near_school"
+                        android:layout_width="85dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:layout_marginEnd="@dimen/default_margin"
+                        android:background="@drawable/near_btn_selector"
+                        android:padding="2dp"
+                        android:text="Ecoles"
+                        android:textAllCaps="false"
+                        android:textColor="@color/grey_40"
+                        android:textSize="12sp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/filter_near_cinema"
+                        android:layout_width="85dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:layout_marginEnd="@dimen/default_margin"
+                        android:background="@drawable/near_btn_selector"
+                        android:padding="2dp"
+                        android:text="Cinéma proche"
+                        android:textAllCaps="false"
+                        android:textColor="@color/grey_40"
+                        android:textSize="12sp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/filter_near_pool"
+                        android:layout_width="85dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:layout_marginEnd="@dimen/default_margin"
+                        android:background="@drawable/near_btn_selector"
+                        android:padding="2dp"
+                        android:text="Piscine"
+                        android:textAllCaps="false"
+                        android:textColor="@color/grey_40"
+                        android:textSize="12sp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/filter_near_hospital"
+                        android:layout_width="85dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:layout_marginEnd="@dimen/default_margin"
+                        android:background="@drawable/near_btn_selector"
+                        android:padding="2dp"
+                        android:text="Hôpital"
+                        android:textAllCaps="false"
+                        android:textColor="@color/grey_40"
+                        android:textSize="12sp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/filter_near_library"
+                        android:layout_width="85dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:layout_marginEnd="@dimen/default_margin"
+                        android:background="@drawable/near_btn_selector"
+                        android:padding="2dp"
+                        android:text="Bibliothèque"
+                        android:textAllCaps="false"
+                        android:textColor="@color/grey_40"
+                        android:textSize="12sp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/filter_near_park"
+                        android:layout_width="85dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:layout_marginEnd="@dimen/default_margin"
+                        android:background="@drawable/near_btn_selector"
+                        android:padding="2dp"
+                        android:text="Parc"
+                        android:textAllCaps="false"
+                        android:textColor="@color/grey_40"
+                        android:textSize="12sp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/filter_near_nightlife"
+                        android:layout_width="85dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:layout_marginEnd="@dimen/default_margin"
+                        android:background="@drawable/near_btn_selector"
+                        android:padding="2dp"
+                        android:text="Vie Nocturne"
+                        android:textAllCaps="false"
+                        android:textColor="@color/grey_40"
+                        android:textSize="12sp" />
+
+                </com.google.android.flexbox.FlexboxLayout>
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/filter_search_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:text="@string/typeBien"
-            android:translationX="5dp"
-            app:layout_constraintBottom_toTopOf="@+id/typeBien"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_gravity="bottom|end"
+            android:tint="@color/white"
+            android:layout_margin="@dimen/spacing_smlarge"
+            android:focusable="true"
+            android:clickable="true"
+            app:fabSize="normal"
+            app:rippleColor="@android:color/white"
+            app:srcCompat="@drawable/ic_search_black_24dp" />
 
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-</LinearLayout>
-
-
+</androidx.constraintlayout.widget.ConstraintLayout>
 

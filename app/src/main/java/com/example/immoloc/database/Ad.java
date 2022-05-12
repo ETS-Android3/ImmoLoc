@@ -34,8 +34,13 @@ public class Ad {
     @ColumnInfo(name = "city_id")
     public int cityId;
 
+    @ColumnInfo(name = "title")
     public String title;
+
+    @ColumnInfo(name = "text")
     public String text;
+
+    @ColumnInfo(name = "contact")
     public String contact;
 
     @ColumnInfo(name = "date_debut_loc")
@@ -44,6 +49,7 @@ public class Ad {
     @ColumnInfo(name = "date_fin_loc")
     public String dateFin;
 
+    @ColumnInfo(name = "price")
     public int price;
 
     /*

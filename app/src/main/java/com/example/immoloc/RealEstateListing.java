@@ -9,7 +9,7 @@ public class RealEstateListing extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_real_estate_listing);
+        setContentView(R.layout.activity_search_real_estate);
     }
 
     /** Ici apparaîtront les annonces les plus récentes, fetchées depuis la base de données **/
