@@ -55,6 +55,10 @@
     <string name="dpt">Département</string>
     <string name="region">Région</string>
 
+    <!-- Reset password -->
+    <string name="resetPassText">Réinitialisez votre mot de passe</string>
+    <string name="confirmPass">Confirmez votre mot de passe</string>
+    <string name="confirmReinitText">Changer mon mot de passe</string>
 
     <string-array name="typeDeBien">
         <item>Appartement</item>

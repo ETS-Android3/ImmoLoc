@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -66,9 +65,10 @@ public class Login extends AppCompatActivity {
         });
 
         // Au clic sur mot de passe oublié
-        mdpOublié = findViewById(R.id.alreadyHaveAccount);
+        mdpOublié = findViewById(R.id.passwordForgotter);
         mdpOublié.setOnClickListener(view -> {
-            // Définir un formulaire d'oubli d'identifiants et y envoyer l'utilisateur
+            Intent redirection = new Intent(this, ForgotPassword.class);
+            startActivity(redirection);
         });
 
         // Au clic sur s'inscrire

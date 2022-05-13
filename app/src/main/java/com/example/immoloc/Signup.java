@@ -82,7 +82,7 @@ public class Signup extends AppCompatActivity {
 
 
         // Redirection sur la page de Connexion si utilisateur déjà détenteur d'un compte
-        alreadyHaveAcc = findViewById(R.id.alreadyHaveAccount);
+        alreadyHaveAcc = findViewById(R.id.passwordForgotter);
         alreadyHaveAcc.setOnClickListener(view -> {
             Intent redirection = new Intent(this, Login.class);
             startActivity(redirection);
