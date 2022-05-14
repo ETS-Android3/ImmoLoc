@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -25,6 +26,13 @@ public interface UserDao {
 
     @Query("SELECT * FROM user WHERE email = :mail AND password = :pass")
     User login(String mail, String pass);
+
+    // Changement/Réinitialisation du mot de passe
+    @Query("UPDATE user SET password=:new_password WHERE email =:userEmail")
+    void updatePassword(String new_password, String userEmail);
+
+    @Update
+    void update(User user);
 
     @Insert
     void insert(User user);

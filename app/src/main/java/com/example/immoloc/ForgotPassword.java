@@ -28,7 +28,7 @@ public class ForgotPassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_forgotten);
 
-
+        // Premier bouton pour le changement de mot de passe
         resetPassword = findViewById(R.id.btnResetPass);
 
         // Au clic sur le bouton de réinitialisation du mot de passe
@@ -91,17 +91,31 @@ public class ForgotPassword extends AppCompatActivity {
 
                                     // Bouton final pour la modification du mot de passe
                                     confirmReset.setOnClickListener(view1 -> {
-                                        Toast.makeText(getApplicationContext(), "Test", Toast.LENGTH_LONG).show();
+
+                                        String password1 = pass1.getText().toString();
+                                        String confirm_password =  pass2.getText().toString();
+                                        String mailSecondForm = mail2.getText().toString();
+                                        User user = userDao.findEmail(mailSecondForm);
+                                        if (password1.isEmpty() | confirm_password.isEmpty() | mailSecondForm.isEmpty()) {
+                                            Toast.makeText(getApplicationContext(), "Vous devez remplir tous les champs", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            // si l'email existe
+                                            if (user != null) {
+                                                if (password1.equals(confirm_password)) {
+                                                    userDao.updatePassword(password1, mailSecondForm);
+                                                    Toast.makeText(getApplicationContext(), "Votre mot de passe a bien été changé.", Toast.LENGTH_LONG).show();
+                                                    Intent redir = new Intent(ForgotPassword.this, Login.class);
+                                                    startActivity(redir);
+                                                } else {
+                                                    Toast.makeText(getApplicationContext(), "Les mots de passe ne correspondent pas. Veuillez rentrer les mêmes mots de passe.", Toast.LENGTH_LONG).show();
+                                                }
+                                            } else {
+                                                Toast.makeText(getApplicationContext(), "Cet email n'existe pas", Toast.LENGTH_LONG).show();
+                                            }
+                                        }
                                     });
-
-
                                 }
                             });
-
-
-
-
-                            //startActivity(new Intent(ForgotPassword.this, HomeActivity.class));
                         }
                     }
                 }).start();
