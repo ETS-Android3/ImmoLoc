@@ -41,7 +41,7 @@
                         android:inputType="number"
                         android:maxLength="4"
                         android:padding="0dp"
-                        tools:text="900" />
+                        tools:text="400" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,7 +63,7 @@
                         android:inputType="number"
                         android:maxLength="10"
                         android:padding="0dp"
-                        tools:text="123456000" />
+                        tools:text="6000" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -108,7 +108,7 @@
                         android:inputType="number"
                         android:maxLength="2"
                         android:padding="0dp"
-                        tools:text="10" />
+                        tools:text="5" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -130,7 +130,7 @@
                         android:inputType="number"
                         android:maxLength="2"
                         android:padding="0dp"
-                        tools:text="3" />
+                        tools:text="1" />
                 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -151,7 +151,7 @@
                         android:inputType="number"
                         android:maxLength="2"
                         android:padding="0dp"
-                        tools:text="5" />
+                        tools:text="3" />
 
                 </com.google.android.material.textfield.TextInputLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -170,7 +170,7 @@
                     android:inputType="textCapWords"
                     android:maxLength="100"
                     android:padding="0dp"
-                    tools:text="10 rue de la lune" />
+                    tools:text="12 rue de la paix" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
