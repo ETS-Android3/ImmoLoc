@@ -57,7 +57,11 @@ public class Login extends AppCompatActivity {
                                 }
                             });
                         } else {
-                            startActivity(new Intent(Login.this, HomeActivity.class));
+                            String userName = userDao.findName(mailText);
+                            //startActivity(new Intent(Login.this, HomeActivity.class));
+                            Intent i = new Intent(Login.this, HomeActivity.class);
+                            i.putExtra("getUN",userName);
+                            startActivity(i);
                         }
                     }
                 }).start();

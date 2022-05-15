@@ -31,6 +31,9 @@ public interface UserDao {
     @Query("UPDATE user SET password=:new_password WHERE email =:userEmail")
     void updatePassword(String new_password, String userEmail);
 
+    @Query("SELECT first_name FROM user WHERE email =:userEmail")
+    String findName(String userEmail);
+
     @Update
     void update(User user);
 

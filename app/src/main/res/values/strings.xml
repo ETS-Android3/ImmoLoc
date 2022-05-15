@@ -6,11 +6,16 @@
     <string name="welcomeDescription">Bienvenue sur LocImmo, votre\n application de recherche\n de biens immbobiliers dans\n toute la France!</string>
     <string name="welcomeBtn">Démarrer</string>
 
-    <!-- Home page (activity_main yet) -->
+    <!-- Main Activity -->
     <string name="inscriptionBtn">Inscription</string>
     <string name="connexionBtn">Connexion</string>
     <string name="showImmoHouses">Biens immobiliers</string>
+
+    <!-- Home page -->
     <string name="title_activity_login">Login</string>
+    <string name="titlePage">Bienvenue sur LocImmo, %1$s</string>
+    <string name="btnAddAd">Ajouter une annonce</string>
+    <string name="showMyAdds">Mes annonces</string>
 
     <!-- Login page -->
     <string name="co">Connexion</string>
@@ -33,6 +38,7 @@
     <string name="proBtn">Professionnel</string>
     <string name="privateBtn">Particulier</string>
     <string name="title_activity_home">HomeActivity</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
