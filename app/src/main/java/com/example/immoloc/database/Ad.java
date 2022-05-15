@@ -19,7 +19,6 @@ import androidx.room.PrimaryKey;
                         parentColumns = "id",
                         childColumns = "category_id",
                         onDelete = ForeignKey.CASCADE)})
-
 public class Ad {
 
     @PrimaryKey(autoGenerate = true)
@@ -113,7 +112,6 @@ public class Ad {
     public void setText(String text) {
         this.text = text;
     }
-
 
     public String getDateDebut() {
         return dateDebut;

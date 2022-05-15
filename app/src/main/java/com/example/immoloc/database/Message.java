@@ -6,20 +6,19 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "message",
-        foreignKeys =
-                {@ForeignKey(entity = User.class,
-                        parentColumns = "id",
-                        childColumns = "user_id_sender",
-                        onDelete = ForeignKey.CASCADE),
-                @ForeignKey(entity = User.class,
-                        parentColumns = "id",
-                        childColumns = "user_id_receiver",
-                        onDelete = ForeignKey.CASCADE),
-                @ForeignKey(entity = Ad.class,
-                        parentColumns = "id",
-                        childColumns = "ad_id",
-                        onDelete = ForeignKey.CASCADE)})
-
+    foreignKeys =
+            {@ForeignKey(entity = User.class,
+                    parentColumns = "id",
+                    childColumns = "user_id_sender",
+                    onDelete = ForeignKey.CASCADE),
+                    @ForeignKey(entity = User.class,
+                            parentColumns = "id",
+                            childColumns = "user_id_receiver",
+                            onDelete = ForeignKey.CASCADE),
+                    @ForeignKey(entity = Ad.class,
+                            parentColumns = "id",
+                            childColumns = "ad_id",
+                            onDelete = ForeignKey.CASCADE)})
 public class Message {
 
     @PrimaryKey(autoGenerate = true)

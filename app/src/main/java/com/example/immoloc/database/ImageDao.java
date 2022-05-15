@@ -1,22 +1,23 @@
 package com.example.immoloc.database;
 
-import androidx.room.Delete;
+import android.media.Image;
+
+import androidx.room.Dao;
 import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.immoloc.database.Image;
 
 import java.util.List;
 
+@Dao
 public interface ImageDao {
 
     @Insert
-    void insert(Image... images);
+    void insert(ImageTable... images);
 
-    @Query("SELECT * FROM Image")
-    List<Image> getAllImage();
+    @Query("SELECT * FROM imagetable")
+    List<ImageTable> getAllImage();
 
-    @Query("SELECT * FROM Image where id = :imageId")
-    List<Image> getImageByImageId(int imageId);
+    @Query("SELECT * FROM imagetable where id = :imageId")
+    List<ImageTable> getImageByImageId(int imageId);
 }
