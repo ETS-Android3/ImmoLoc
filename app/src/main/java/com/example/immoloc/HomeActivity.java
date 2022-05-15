@@ -6,24 +6,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.Lifecycle;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.immoloc.database.User;
 import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
-    public TextView search;
+    public TextView search, profile, home;
     public Button mesAnnonces, ajouterAnnonce;
 
     @Override
@@ -61,17 +59,26 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         // Au clic sur le bouton recherche du footer
         search = findViewById(R.id.searchBtn);
-        search.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent redirection = new Intent(v.getContext(), SearchActivity.class);
+        search.setOnClickListener(v -> {
+            Intent redirection = new Intent(v.getContext(), SearchActivity.class);
+            startActivity(redirection);
+        });
+        // Au clic sur le bouton accueil du footer
+        home = findViewById(R.id.homeBtn);
+        home.setOnClickListener(v -> {
+            if(getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)){
+                Toast.makeText(this, "Vous êtes déjà dans la page d'accueil", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent redirection = new Intent(v.getContext(), HomeActivity.class);
                 startActivity(redirection);
             }
         });
-        // Au clic sur le bouton accueil du footer
-        // à implémenter
         // Au clic sur le bouton profil du footer
-        // à implémenter
+        profile = findViewById(R.id.profileBtn);
+        profile.setOnClickListener(v -> {
+            Intent redirection = new Intent(v.getContext(), ProfileActivity.class);
+            startActivity(redirection);
+        });
 
       // Pour la déconnexion
       if (getIntent().getBooleanExtra("EXIT", false)) {
@@ -96,8 +103,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                   return true;
 
               case R.id.nav_profile:
-                  Toast.makeText(this, "Page pas encore implémentée", Toast.LENGTH_SHORT).show();
-                  // à implémenter
+                  Intent redirection = new Intent(this, ProfileActivity.class);
+                  startActivity(redirection);
                   //Intent intent = new Intent(this, Profile.class);
           }
           return true;

@@ -65,6 +65,7 @@
     <string name="resetPassText">Réinitialisez votre mot de passe</string>
     <string name="confirmPass">Confirmez votre mot de passe</string>
     <string name="confirmReinitText">Changer mon mot de passe</string>
+    <string name="addImg">Ajoute une image</string>
 
     <string-array name="typeDeBien">
         <item>Appartement</item>
