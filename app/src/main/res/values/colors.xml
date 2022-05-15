@@ -9,6 +9,8 @@
     <color name="secondaryDarkColor">#a30000</color>
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#ffffff</color>
+    <color name="veryTransparentWhite">#59FFFFFF</color>
+
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
