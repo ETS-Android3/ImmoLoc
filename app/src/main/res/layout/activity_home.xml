@@ -91,7 +91,7 @@
         layout="@layout/nav_footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
 
