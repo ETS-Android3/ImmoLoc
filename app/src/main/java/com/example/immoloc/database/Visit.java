@@ -5,17 +5,15 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "visit",
-        foreignKeys =
-                {@ForeignKey(entity = User.class,
-                        parentColumns = "id",
-                        childColumns = "user_id",
-                        onDelete = ForeignKey.CASCADE),
+@Entity(tableName = "visit", foreignKeys =
+        {@ForeignKey(entity = User.class,
+                parentColumns = "id",
+                childColumns = "user_id",
+                onDelete = ForeignKey.CASCADE),
                 @ForeignKey(entity = Ad.class,
                         parentColumns = "id",
                         childColumns = "ad_id",
                         onDelete = ForeignKey.CASCADE)})
-
 public class Visit {
 
     @PrimaryKey(autoGenerate = true)
