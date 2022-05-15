@@ -554,19 +554,27 @@
                                 android:layout_height="wrap_content"
                                 android:contentDescription="image_photo"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toStartOf="@id/details_agent"
-                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/details_agent"
+                                app:layout_constraintStart_toStartOf="parent"
                                 app:srcCompat="@drawable/ic_person_black_24dp" />
 
                             <TextView
                                 android:id="@+id/details_agent"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/spacing_middle"
+                                android:layout_marginStart="40dp"
+                                android:layout_marginBottom="4dp"
                                 app:layout_constraintBottom_toBottomOf="@id/details_agent_icon"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="@id/details_agent_icon"
+                                app:layout_constraintStart_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@id/details_agent_icon"
                                 tools:text="Hugo Maitre" />
+
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Contacter"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"/>
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
