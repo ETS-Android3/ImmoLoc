@@ -20,6 +20,8 @@ import com.example.immoloc.database.AdDao;
 import com.example.immoloc.database.AppDatabase;
 import com.example.immoloc.database.ImageDao;
 import com.example.immoloc.database.ImageTable;
+import com.example.immoloc.database.User;
+import com.example.immoloc.database.UserDao;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -40,7 +42,7 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
     ImageView imView;
     TextInputEditText surface, prix, nbWaterRooms, nbRooms, nbBedrooms, adresse,
                       ville, zipCode, owner, description, dateDebut, dateFin;
-    String getUserName;
+    String getUserName, getUserId;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -74,6 +76,7 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             getUserName = extras.getString("getUN");
+            getUserId = extras.getString("userId");
             owner.setText(getUserName);
         }
 
@@ -163,11 +166,14 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
     public void saveAd(View view) {
         boolean correct = checkAndUploadImages(view);
         if (correct == true) {
-            // Ferme l'activité et renvoi à l'activité précédente
-            finish();
-            //AdTable adTable = new AdTable();
+            //save les champs de l'ad
+            AdTable adTable = new AdTable();
+            //prendre en cpt les FK
+            //adTable.setUserId(getUserId);
             //adTable.setDateDebut(dateDebut.getText().toString());
             //adDao.insert(adTable);
+            // Ferme l'activité et renvoi à l'activité précédente
+            finish();
         } else {
             Toast.makeText(this, "Errors with the images", Toast.LENGTH_SHORT).show();
         }

@@ -35,8 +35,6 @@ public class Login extends AppCompatActivity {
             String mailText = mail.getText().toString();
             String passwordText = password.getText().toString();
 
-            User user = new User();
-
             if(mailText.isEmpty() || passwordText.isEmpty()){
                 Toast.makeText(this, "Vous devez remplir les champs pour vous connecter" +
                         "", Toast.LENGTH_LONG).show();
@@ -45,24 +43,17 @@ public class Login extends AppCompatActivity {
             } else {
                 locImmoDatabase = AppDatabase.getInstance(this);
                 UserDao userDao = locImmoDatabase.userDao();
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        User user = userDao.login(mailText, passwordText);
-                        if(user == null){
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(getApplicationContext(), "Identifiants incorrects", Toast.LENGTH_LONG).show();
-                                }
-                            });
-                        } else {
-                            String userName = userDao.findName(mailText);
-                            //startActivity(new Intent(Login.this, HomeActivity.class));
-                            Intent i = new Intent(Login.this, HomeActivity.class);
-                            i.putExtra("getUN",userName);
-                            startActivity(i);
-                        }
+                new Thread(() -> {
+                    User user = userDao.login(mailText, passwordText);
+                    if(user == null){
+                        runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Identifiants incorrects", Toast.LENGTH_LONG).show());
+                    } else {
+                        String userName = userDao.findName(mailText, passwordText);
+                        Intent i = new Intent(Login.this, HomeActivity.class);
+                        i.putExtra("getUN",userName);
+                        i.putExtra("getUserId", user.getId());
+                        //runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Id: "+user.getId(), Toast.LENGTH_LONG).show());
+                        startActivity(i);
                     }
                 }).start();
             }

@@ -1,11 +1,8 @@
 package com.example.immoloc;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,7 +26,6 @@ public class Signup extends AppCompatActivity {
 
         // We create an instance of our database
         locImmoDatabase = AppDatabase.getInstance(this);
-
         /* We use the abstract method from the AppDatabase to get an instance of DAO.
         / We can use the methods from the DAO instance to interact with the database */
         UserDao userDao = locImmoDatabase.userDao();
@@ -43,27 +39,35 @@ public class Signup extends AppCompatActivity {
         // On sign up user click ...
         signup = findViewById(R.id.connectionBtnLogin);
         signup.setOnClickListener(view -> {
+
+            String getEmail = email.getText().toString();
+            String getPass = password.getText().toString();
+            String getFn = firstName.getText().toString();
+            String getLn = lastName.getText().toString();
+            String getPhone = phone.getText().toString();
+
             User user = new User();
+            boolean mailExists = userDao.isRecordExistsMail(email.getText().toString());
 
-            user.setEmail(email.getText().toString());
-            user.setPassword(password.getText().toString());
-            user.setFirstName(firstName.getText().toString());
-            user.setLastName(lastName.getText().toString());
-            user.setPhone(phone.getText().toString());
+            if(mailExists){
+                Toast.makeText(this, "Un compte avec cet email existe déjà", Toast.LENGTH_SHORT).show();
+            }
+            if (getEmail.isEmpty() | getPass.isEmpty() | getFn.isEmpty() | getLn.isEmpty() | getPhone.isEmpty()){
+                Toast.makeText(this, "Tous les champs sont obligatoires. Merci de les remplir", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "voir: " +getEmail + getPass + getFn +  getLn + getPhone, Toast.LENGTH_LONG).show();
 
-            Log.d("debug", "check : "+email.getText().toString());
-            Log.d("debug", "get email by method: "+ user.getEmail());
-
-            userDao.insert(user);
-
-            Toast.makeText(this, "Votre compte vient d'être créé", Toast.LENGTH_LONG).show();
-
-            Intent redir = new Intent(this, Login.class);
-            startActivity(redir);
-            /* if one of the fields not given dont access to other page
-             when created account, user will be redirected directly to home page
-             but for now just a toast */
-
+            }
+            else {
+                user.setEmail(getEmail);
+                user.setPassword(getPass);
+                user.setFirstName(getFn);
+                user.setLastName(getLn);
+                user.setPhone(getPhone);
+                userDao.insert(user);
+                Toast.makeText(this, "Votre compte vient d'être créé", Toast.LENGTH_LONG).show();
+                Intent redir = new Intent(this, Login.class);
+                startActivity(redir);
+            }
             // add functionality for valid password and valid email as well
         });
 

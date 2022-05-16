@@ -20,7 +20,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     public TextView search, profile, home;
     public Button mesAnnonces, ajouterAnnonce;
-    String valUserName;
+    String valUserName, valUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             valUserName = extras.getString("getUN");
+            valUserId = extras.getString("getUserId");
             TextView tv = findViewById(R.id.titleHomePage);
             tv.setText(String.format(getString(R.string.titlePage), valUserName));
         }
@@ -113,6 +114,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
       ajouterAnnonce.setOnClickListener(view -> {
           Intent redir = new Intent(this, AddAd.class);
           redir.putExtra("getUN",valUserName);
+          redir.putExtra("userId",valUserId);
           startActivity(redir);
       });
 
