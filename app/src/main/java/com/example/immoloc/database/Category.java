@@ -8,7 +8,6 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "category")
 public class Category {
 
-
     @PrimaryKey(autoGenerate = true)
     public int id;
 
@@ -20,23 +19,15 @@ public class Category {
     Studio, Duplex , F&, F2, F3 .. , maison, maison avec jardin,
     maison mitoyenne ...
      */
-    /* Constructor */
-    public Category(String categoryType){
-        this.categoryType = categoryType;
-    }
-
 
     public int getId(){
         return id;
     }
-
     public void setId(int id) { this.id = id; }
-
 
     public String getCategoryType() {
         return categoryType;
     }
-
     public void setCategoryType(String categoryType) {
         this.categoryType = categoryType;
     }

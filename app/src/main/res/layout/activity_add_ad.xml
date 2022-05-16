@@ -96,6 +96,7 @@
                     app:startIconDrawable="@drawable/ic_weekend_black_24dp">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/nbRooms"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"

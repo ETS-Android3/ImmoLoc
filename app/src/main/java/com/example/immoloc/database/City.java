@@ -33,62 +33,44 @@ public class City {
     @ColumnInfo(name = "price_loc_m2")
     public double price_loc_m2;
 
-    /* définition de plusieurs constructeurs */
-
-    public City(String name, String zip_code, String department){
-        this.name = name;
-        this.zip_code = zip_code;
-        this.department = department;
-    }
-
-
-
     public int getId(){
         return id;
     }
-
     public void setId(int id) { this.id = id; }
 
-
     public String getName() {return name; }
+
+    public String getDepartment() { return department; }
+    public void setDepartment(String department) { this.department = department; }
 
     public void setName(String name) {
         this.name = name;
     }
 
-
     public String getZone() {
         return zone;
     }
-
     public void setZone(String zone) {
         this.zone = zone;
     }
-
-
+    
     public String getZipCode() {
         return zip_code;
     }
-
     public void setZipCode(String zip_code) {
         this.zip_code = zip_code;
     }
 
-
     public int getPopulation() {
         return population;
     }
-
     public void setPopulation(int population) {
         this.population = population;
     }
 
-
-
     public String getGeoCor() {
         return geographic_coordinates;
     }
-
     public void setGeoCor(String geographic_coordinates) {
         this.geographic_coordinates = geographic_coordinates;
     }

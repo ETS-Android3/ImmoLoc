@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,10 +19,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.immoloc.database.AdTable;
 import com.example.immoloc.database.AdDao;
 import com.example.immoloc.database.AppDatabase;
+import com.example.immoloc.database.Category;
+import com.example.immoloc.database.CategoryDao;
+import com.example.immoloc.database.City;
+import com.example.immoloc.database.CityDao;
 import com.example.immoloc.database.ImageDao;
 import com.example.immoloc.database.ImageTable;
-import com.example.immoloc.database.User;
-import com.example.immoloc.database.UserDao;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -36,13 +39,18 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
     MaterialButton uploadAdd;
     Bitmap bmpImg;
     Uri uri;
-    AppDatabase locImmoDatabase; // instance de la bdd
-    ImageDao imgDao;
-    AdDao adDao;
     ImageView imView;
     TextInputEditText surface, prix, nbWaterRooms, nbRooms, nbBedrooms, adresse,
                       ville, zipCode, owner, description, dateDebut, dateFin;
-    String getUserName, getUserId;
+    String getUserName;
+    int getUserId;
+    String getType; // Type d'appartement choisi avec le spinner et qui est intialisé par onItemSelected()
+    AppDatabase locImmoDatabase; // instance de la bdd
+    // Dao's
+    ImageDao imgDao;
+    AdDao adDao;
+    CategoryDao catDao;
+    CityDao cityDao;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -76,7 +84,8 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             getUserName = extras.getString("getUN");
-            getUserId = extras.getString("userId");
+            Intent mIntent = getIntent();
+            getUserId = mIntent.getIntExtra("userId", 0);
             owner.setText(getUserName);
         }
 
@@ -93,7 +102,6 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
         uploadAdd = findViewById(R.id.add_the_estate_confirm_btn);
         uploadAdd.setOnClickListener(view -> {
             saveAd(view);
-            Toast.makeText(this, "Annonce uploadée!", Toast.LENGTH_SHORT).show();
         });
 
 
@@ -167,21 +175,66 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
         boolean correct = checkAndUploadImages(view);
         if (correct == true) {
             //save les champs de l'ad
+
+            String getSurface = surface.getText().toString();
+            String getPrix = prix.getText().toString();
+            String getNbRooms = nbRooms.getText().toString();
+            String getNbWR = nbWaterRooms.getText().toString();
+            String getAdr = adresse.getText().toString();
+            String getCity = ville.getText().toString();
+            String getDateDebut = dateDebut.getText().toString();
+            String getDateFin = dateFin.getText().toString();
+            String getDesc = description.getText().toString();
+
+            // prendre en compte le cas où certains champs sont vides, voire la totalité
+
+            catDao = locImmoDatabase.catDao();
+            int idCat = catDao.getIdByType(getType);
+            cityDao = locImmoDatabase.cityDao();
+            int idCity = cityDao.getIdByName(getCity);
+
+            /* Category table */
+            Category cat = new Category();
+            cat.setCategoryType(getType);
+            catDao.insert(cat);
+
+            /* City table */
+            City city = new City();
+            city.setName(getCity);
+            //city.setPopulation(2000000);
+            city.setPriceLoc(Integer.parseInt(getPrix));
+            //city.setZipCode("75000");
+            //city.setZone("07eme arrondissement");
+            //city.setDepartment("paris");
+            //city.setGeoCor("0.38,0.774");
+            cityDao.insert(city);
+
+            /* Ad table */
             AdTable adTable = new AdTable();
-            //prendre en cpt les FK
-            //adTable.setUserId(getUserId);
+            adTable.setUserId(getUserId);
+            adTable.setCategoryId(idCat);
+            adTable.setCityId(idCity);
+            //adTable.setTitle("cc");
+            adTable.setText(getDesc);
+            //adTable.setContact("635539584"); // autofill
+            adTable.setDateDebut(getDateDebut);
+            adTable.setDateFin(getDateFin);
+            adTable.setPrice(Integer.parseInt(getPrix));
+            adTable.setSurface(Integer.parseInt(getSurface));
             //adTable.setDateDebut(dateDebut.getText().toString());
-            //adDao.insert(adTable);
+            adDao.insert(adTable);
+
             // Ferme l'activité et renvoi à l'activité précédente
+            Toast.makeText(this, "Annonce uploadée!", Toast.LENGTH_SHORT).show();
             finish();
         } else {
-            Toast.makeText(this, "Errors with the images", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Veuillez ajouter une image", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
-        parent.getItemAtPosition(0);
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+        getType = parent.getItemAtPosition(position).toString();
     }
 
     @Override

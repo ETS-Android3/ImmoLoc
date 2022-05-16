@@ -26,6 +26,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract ImageDao imgDao();
     public abstract AdDao adDao();
+    public abstract CategoryDao catDao();
+    public abstract CityDao cityDao();
 
 
     private static AppDatabase instance;

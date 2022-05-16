@@ -20,7 +20,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     public TextView search, profile, home;
     public Button mesAnnonces, ajouterAnnonce;
-    String valUserName, valUserId;
+    String valUserName;
+    int valUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +33,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         // On récupère le nom de l'utilisateur que l'Activité Login nous a envoyé pour l'afficher
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
+            Intent mIntent = getIntent();
+            valUserId = mIntent.getIntExtra("getUserId", 0);
             valUserName = extras.getString("getUN");
-            valUserId = extras.getString("getUserId");
             TextView tv = findViewById(R.id.titleHomePage);
             tv.setText(String.format(getString(R.string.titlePage), valUserName));
         }

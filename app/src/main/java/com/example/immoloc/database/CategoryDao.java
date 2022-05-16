@@ -9,8 +9,11 @@ import androidx.room.Query;
 public interface CategoryDao {
 
     // Lors d'une recherche de catégorie
-    @Query("SELECT category_type FROM category WHERE category_type LIKE :inputCategory")
+    @Query("SELECT * FROM category WHERE category_type LIKE :inputCategory")
     Category getCatType(String inputCategory);
+
+    @Query("SELECT id FROM category WHERE category_type =:inputCat")
+    int getIdByType(String inputCat);
 
     @Insert
     void insert(Category cat);

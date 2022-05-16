@@ -3,7 +3,7 @@
 
     <!-- Welcome page -->
     <string name="welcome">Bienvenue!</string>
-    <string name="welcomeDescription">Bienvenue sur LocImmo, votre\n application de recherche\n de biens immbobiliers dans\n toute la France!</string>
+    <string name="welcomeDescription">Bienvenue sur ImmoLoc, votre\n application de recherche\n de biens immbobiliers dans\n toute la France!</string>
     <string name="welcomeBtn">Démarrer</string>
 
     <!-- Main Activity -->
@@ -13,7 +13,7 @@
 
     <!-- Home page -->
     <string name="title_activity_login">Login</string>
-    <string name="titlePage">Bienvenue sur LocImmo, %1$s</string>
+    <string name="titlePage">Bienvenue sur ImmoLoc %1$s</string>
     <string name="btnAddAd">Ajouter une annonce</string>
     <string name="showMyAdds">Mes annonces</string>
 
