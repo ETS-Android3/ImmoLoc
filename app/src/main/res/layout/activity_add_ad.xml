@@ -68,24 +68,15 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/add_estate_type"
+            <Spinner
+                android:id="@+id/typeBien"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:layout_marginTop="@dimen/spacing_large"
-                app:helperText="Type"
-                app:startIconDrawable="@drawable/ic_home_black_24dp">
+                android:layout_height="50dp"
+                android:contentDescription="@string/typeBien"
+                android:maxLength="40"
+                android:padding="0dp"
+                tools:text="Appartement" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textCapSentences"
-                    android:maxLength="40"
-                    android:padding="0dp"
-                    tools:text="Appartement" />
-
-            </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -434,6 +425,11 @@
                 tools:layout_height="50dp"
                 tools:visibility="visible">
 
+                <ImageView
+                    android:id="@+id/userImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="450dp"></ImageView>
+
                 <HorizontalScrollView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -447,6 +443,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:orientation="horizontal" />
+                    
+
 
                 </HorizontalScrollView>
             </com.google.android.material.card.MaterialCardView>
