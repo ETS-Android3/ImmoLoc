@@ -3,9 +3,11 @@ package com.example.immoloc;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,6 +22,9 @@ import com.example.immoloc.database.ImageDao;
 import com.example.immoloc.database.ImageTable;
 import com.google.android.material.button.MaterialButton;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 
 public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -28,6 +33,7 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
     private final int GALLERY_CODE = 1000;
     MaterialButton uploadAdd;
     Bitmap bmpImg;
+    Uri uri;
     AppDatabase locImmoDatabase;
     ImageDao imgDao;
     ImageView imView;
@@ -86,6 +92,7 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
             if (requestCode == GALLERY_CODE) {
+                uri = data.getData();
                 imView.setImageURI(data.getData());
             } if (requestCode == CAMERA_INTENT){
                 bmpImg = (Bitmap) data.getExtras().get("data");
@@ -100,13 +107,26 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
 
     public void savePhoto(View view) {
         if (bmpImg == null) {
-            Toast.makeText(this, "Image manquante", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Image manquante", Toast.LENGTH_SHORT).show();
+            if (uri != null){
+                try {
+                    ImageTable img = new ImageTable();
+                    InputStream iStream = getContentResolver().openInputStream(uri);
+                    byte[] inputData = DataConverter.getBytes(iStream);
+                    img.setImage(inputData);
+                    imgDao.insert(img);
+                    //Toast.makeText(this, "URI SUCCEED", Toast.LENGTH_SHORT).show();
+                } catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
         } else {
             ImageTable img = new ImageTable();
             img.setImage(DataConverter.convertImg2ByteArray(bmpImg));
             imgDao.insert(img);
-            Toast.makeText(this, "Image uploadée!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "BMP IMG SUCCEED", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     @Override
