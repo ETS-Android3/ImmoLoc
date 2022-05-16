@@ -20,15 +20,6 @@ public class User {
     @ColumnInfo(name = "phone")
     public String phone;
 
-    /*
-    public User(String firstName, String lastName, String email, String password, String phone){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
-    }
-*/
 
     public int getId() {
         return id;

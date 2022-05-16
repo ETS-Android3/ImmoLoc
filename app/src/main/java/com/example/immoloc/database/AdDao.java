@@ -9,17 +9,17 @@ import androidx.room.Query;
 public interface AdDao {
 
 
-    @Query("SELECT title FROM ad WHERE title = :inputTitle")
-    Ad getAdByTitle(String inputTitle);
+    @Query("SELECT * FROM adtable WHERE title = :inputTitle")
+    AdTable getAdByTitle(String inputTitle);
 
-    @Query("SELECT title FROM ad WHERE price = :inputPrice")
-    Ad getAdByPrice(String inputPrice);
+    @Query("SELECT * FROM adtable WHERE price = :inputPrice")
+    AdTable getAdByPrice(String inputPrice);
 
     // à recompléter par la suite lors des tests
 
     @Insert
-    void insert(Ad ad);
+    void insert(AdTable adTable);
 
     @Delete
-    void delete(Ad ad);
+    void delete(AdTable adTable);
 }

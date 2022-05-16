@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 5,
-    "identityHash": "b701525599f4b6a51415a8cbf8bc1971",
+    "identityHash": "2ae79b73a3986c0c576cf056bf36f17c",
     "entities": [
       {
         "tableName": "user",
@@ -107,12 +107,377 @@
           }
         ],
         "foreignKeys": []
+      },
+      {
+        "tableName": "ad",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `user_id` INTEGER NOT NULL, `category_id` INTEGER NOT NULL, `city_id` INTEGER NOT NULL, `title` TEXT, `text` TEXT, `contact` TEXT, `date_debut_loc` TEXT, `date_fin_loc` TEXT, `price` INTEGER NOT NULL, `area` INTEGER NOT NULL, FOREIGN KEY(`user_id`) REFERENCES `user`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`city_id`) REFERENCES `city`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`category_id`) REFERENCES `category`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userId",
+            "columnName": "user_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "categoryId",
+            "columnName": "category_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cityId",
+            "columnName": "city_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "text",
+            "columnName": "text",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "contact",
+            "columnName": "contact",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dateDebut",
+            "columnName": "date_debut_loc",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dateFin",
+            "columnName": "date_fin_loc",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "price",
+            "columnName": "price",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "surface",
+            "columnName": "area",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "user",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "user_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "city",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "city_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "category",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "category_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "city",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `zone` TEXT, `zip_code` TEXT, `population` INTEGER NOT NULL, `department` TEXT, `geographic_coordinates` TEXT, `price_loc_m2` REAL NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "zone",
+            "columnName": "zone",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "zip_code",
+            "columnName": "zip_code",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "population",
+            "columnName": "population",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "department",
+            "columnName": "department",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "geographic_coordinates",
+            "columnName": "geographic_coordinates",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "price_loc_m2",
+            "columnName": "price_loc_m2",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "category",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `category_type` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "categoryType",
+            "columnName": "category_type",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "message",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `ad_id` INTEGER NOT NULL, `user_id_receiver` INTEGER NOT NULL, `user_id_sender` INTEGER NOT NULL, `time` TEXT, `message_subject` TEXT, `message_text` TEXT, `message_date` TEXT, FOREIGN KEY(`user_id_sender`) REFERENCES `user`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`user_id_receiver`) REFERENCES `user`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`ad_id`) REFERENCES `ad`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "adId",
+            "columnName": "ad_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userIdReceiver",
+            "columnName": "user_id_receiver",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userIdSender",
+            "columnName": "user_id_sender",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "time",
+            "columnName": "time",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "messageSubject",
+            "columnName": "message_subject",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "messageText",
+            "columnName": "message_text",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "messageDate",
+            "columnName": "message_date",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "user",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "user_id_sender"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "user",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "user_id_receiver"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "ad",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "ad_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "visit",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `ad_id` INTEGER NOT NULL, `user_id` INTEGER NOT NULL, `time` TEXT, `nb_times_visited` TEXT, FOREIGN KEY(`user_id`) REFERENCES `user`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`ad_id`) REFERENCES `ad`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "adId",
+            "columnName": "ad_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userId",
+            "columnName": "user_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "time",
+            "columnName": "time",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "nbTimesVisited",
+            "columnName": "nb_times_visited",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "user",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "user_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "ad",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "ad_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b701525599f4b6a51415a8cbf8bc1971')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2ae79b73a3986c0c576cf056bf36f17c')"
     ]
   }
 }

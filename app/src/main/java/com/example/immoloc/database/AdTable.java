@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "ad",
+@Entity(tableName = "adtable",
         foreignKeys =
                 {@ForeignKey(entity = User.class,
                         parentColumns = "id",
@@ -19,18 +19,19 @@ import androidx.room.PrimaryKey;
                         parentColumns = "id",
                         childColumns = "category_id",
                         onDelete = ForeignKey.CASCADE)})
-public class Ad {
+public class AdTable {
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(defaultValue = "0")
     public int id;
 
-    @ColumnInfo(name = "user_id")
+    @ColumnInfo(name = "user_id", defaultValue = "0")
     public int userId;
 
-    @ColumnInfo(name = "category_id")
+    @ColumnInfo(name = "category_id", defaultValue = "0")
     public int categoryId;
 
-    @ColumnInfo(name = "city_id")
+    @ColumnInfo(name = "city_id", defaultValue = "0")
     public int cityId;
 
     @ColumnInfo(name = "title")
@@ -48,23 +49,18 @@ public class Ad {
     @ColumnInfo(name = "date_fin_loc")
     public String dateFin;
 
-    @ColumnInfo(name = "price")
+    @ColumnInfo(name = "price", defaultValue = "0")
     public int price;
 
-    /*
-    public Ad(String firstName, String lastName, String email, String password, String phone){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
-    }
-*/
+    @ColumnInfo(name = "area",defaultValue = "0")
+    public int surface;
+
+    public int getSurface() { return surface; }
+    public void setSurface(int surface) { this.surface = surface; }
 
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -72,13 +68,11 @@ public class Ad {
     public int getId(){
         return id;
     }
-
     public void setId(int id) { this.id = id; }
 
     public int getUserId() {
         return userId;
     }
-
     public void setUserId(int userId) {
         this.userId = userId;
     }
@@ -86,7 +80,6 @@ public class Ad {
     public int getCityId() {
         return cityId;
     }
-
     public void setCityId(int cityId) {
         this.cityId = cityId;
     }
@@ -94,7 +87,6 @@ public class Ad {
     public int getCategoryId() {
         return categoryId;
     }
-
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
@@ -102,13 +94,11 @@ public class Ad {
     public void setContact(String contact) {
         this.contact = contact;
     }
-
     public String getContact(){ return contact;}
 
     public String getText() {
         return text;
     }
-
     public void setText(String text) {
         this.text = text;
     }
@@ -116,7 +106,6 @@ public class Ad {
     public String getDateDebut() {
         return dateDebut;
     }
-
     public void setDateDebut(String dateDebut) {
         this.dateDebut = dateDebut;
     }
@@ -124,7 +113,6 @@ public class Ad {
     public String getDateFin() {
         return dateFin;
     }
-
     public void setDateFin(String dateFin) {
         this.dateFin = dateFin;
     }
@@ -132,10 +120,8 @@ public class Ad {
     public int getPrice() {
         return price;
     }
-
     public void setPrice(int price) {
         this.price = price;
     }
-
 
 }

@@ -21,10 +21,6 @@ public class Signup extends AppCompatActivity {
     AppDatabase locImmoDatabase;
     EditText email, password, firstName, lastName, phone;
     Button signup;
-    FragmentManager fragmentManager;
-   // String fn, ln, em, psd, ph; // where will be stored raw data of a given user
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,16 +40,9 @@ public class Signup extends AppCompatActivity {
         lastName = findViewById(R.id.editTextTextPersonLastName);
         phone = findViewById(R.id.editTextPhoneNb);
 
-       /* fn = firstName.getText().toString();
-        ln = lastName.getText().toString();
-        em = email.getText().toString();
-        psd = password.getText().toString();
-        ph = phone.getText().toString(); */
-
         // On sign up user click ...
         signup = findViewById(R.id.connectionBtnLogin);
         signup.setOnClickListener(view -> {
-            //User user = new User(fn, ln, em, psd, ph);
             User user = new User();
 
             user.setEmail(email.getText().toString());
@@ -65,12 +54,11 @@ public class Signup extends AppCompatActivity {
             Log.d("debug", "check : "+email.getText().toString());
             Log.d("debug", "get email by method: "+ user.getEmail());
 
-
             userDao.insert(user);
 
             Toast.makeText(this, "Votre compte vient d'être créé", Toast.LENGTH_LONG).show();
 
-            Intent redir = new Intent(this, Signup.class);
+            Intent redir = new Intent(this, Login.class);
             startActivity(redir);
             /* if one of the fields not given dont access to other page
              when created account, user will be redirected directly to home page
@@ -78,8 +66,6 @@ public class Signup extends AppCompatActivity {
 
             // add functionality for valid password and valid email as well
         });
-
-
 
         // Redirection sur la page de Connexion si utilisateur déjà détenteur d'un compte
         alreadyHaveAcc = findViewById(R.id.passwordForgotter);

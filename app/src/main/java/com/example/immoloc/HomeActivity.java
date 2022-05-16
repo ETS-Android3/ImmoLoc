@@ -7,15 +7,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Lifecycle;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,6 +20,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     public TextView search, profile, home;
     public Button mesAnnonces, ajouterAnnonce;
+    String valUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +32,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         // On récupère le nom de l'utilisateur que l'Activité Login nous a envoyé pour l'afficher
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            String value = extras.getString("getUN");
+            valUserName = extras.getString("getUN");
             TextView tv = findViewById(R.id.titleHomePage);
-            tv.setText(String.format(getString(R.string.titlePage), value));
+            tv.setText(String.format(getString(R.string.titlePage), valUserName));
         }
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -110,13 +108,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
           return true;
       });
 
+      // Au clic sur l'ajout d'une annonce
       ajouterAnnonce = findViewById(R.id.ajouterAnnonce);
       ajouterAnnonce.setOnClickListener(view -> {
           Intent redir = new Intent(this, AddAd.class);
+          redir.putExtra("getUN",valUserName);
           startActivity(redir);
       });
 
     } // fin onCreate
+
 
     @Override
     public void onBackPressed() {

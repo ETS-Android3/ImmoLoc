@@ -1,37 +1,32 @@
 package com.example.immoloc.database;
 
 import android.content.Context;
-import android.media.Image;
-import android.view.View;
-
 import androidx.room.AutoMigration;
 import androidx.room.Database;
-import androidx.room.DeleteTable;
 import androidx.room.RenameColumn;
 import androidx.room.RenameTable;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.migration.AutoMigrationSpec;
-import androidx.room.migration.Migration;
-import androidx.sqlite.db.SupportSQLiteDatabase;
+
 
 @Database(
-        version = 5,
-        entities = {User.class, ImageTable.class},
+        version = 6,
+        entities = {User.class, ImageTable.class, AdTable.class, City.class, Category.class, Message.class, Visit.class},
         autoMigrations = {
                 @AutoMigration(
                         from = 2,
-                        to = 5,
+                        to = 6,
                            spec = AppDatabase.MyAutoMigration.class
                 )
         }
 )
 public abstract class AppDatabase extends RoomDatabase {
 
-
     public abstract UserDao userDao();
-
     public abstract ImageDao imgDao();
+    public abstract AdDao adDao();
+
 
     private static AppDatabase instance;
     private static final String DB_name = "immoLoc";
@@ -49,6 +44,7 @@ public abstract class AppDatabase extends RoomDatabase {
     @RenameColumn(tableName = "user", fromColumnName = "id", toColumnName = "user_id")
     @RenameColumn(tableName = "image", fromColumnName = "image", toColumnName = "img")
     @RenameTable(fromTableName = "image", toTableName = "imagetable")
+    @RenameTable(fromTableName = "ad", toTableName = "adtable")
 
     static class MyAutoMigration implements AutoMigrationSpec {
     }

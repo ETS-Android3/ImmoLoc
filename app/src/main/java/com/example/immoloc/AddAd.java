@@ -1,13 +1,11 @@
 package com.example.immoloc;
 
-import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,12 +15,14 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.immoloc.database.AdTable;
+import com.example.immoloc.database.AdDao;
 import com.example.immoloc.database.AppDatabase;
 import com.example.immoloc.database.ImageDao;
 import com.example.immoloc.database.ImageTable;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 
@@ -34,9 +34,13 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
     MaterialButton uploadAdd;
     Bitmap bmpImg;
     Uri uri;
-    AppDatabase locImmoDatabase;
+    AppDatabase locImmoDatabase; // instance de la bdd
     ImageDao imgDao;
+    AdDao adDao;
     ImageView imView;
+    TextInputEditText surface, prix, nbWaterRooms, nbRooms, nbBedrooms, adresse,
+                      ville, zipCode, owner, description, dateDebut, dateFin;
+    String getUserName;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -48,7 +52,31 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
         bmpImg = null;
         locImmoDatabase = AppDatabase.getInstance(this);
         imgDao = locImmoDatabase.imgDao();
+        adDao = locImmoDatabase.adDao();
         imView = findViewById(R.id.userImage);
+
+        // On récupère quelques champs de la page d'ajout d'annonce
+        description = findViewById(R.id.descriptionAd);
+        dateDebut = findViewById(R.id.dateDebut);
+        dateFin = findViewById(R.id.dateFin);
+        prix = findViewById(R.id.price);
+        surface = findViewById(R.id.area);
+        ville = findViewById(R.id.city);
+        adresse = findViewById(R.id.adresse);
+        zipCode = findViewById(R.id.zipCode);
+        nbRooms = findViewById(R.id.nbBedrooms);
+        nbWaterRooms = findViewById(R.id.nbWaterRooms);
+        nbBedrooms = findViewById(R.id.nbBedrooms);
+        owner = findViewById(R.id.owner);
+
+        /* On récupère le nom de l'utilisateur que l'Activité HomeActivity nous a envoyé
+        pour l'autofill dans le champ du formulaire adéquat. L'utilisateur pourra le modifier au choix. */
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            getUserName = extras.getString("getUN");
+            owner.setText(getUserName);
+        }
+
 
         // Au clic sur le bouton-icône gallerie
         ajouterPhotoGallerie = findViewById(R.id.add_estate_load_from_gallery_btn);
@@ -61,7 +89,7 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
         // Déposer l'annonce entière
         uploadAdd = findViewById(R.id.add_the_estate_confirm_btn);
         uploadAdd.setOnClickListener(view -> {
-            savePhoto(view);
+            saveAd(view);
             Toast.makeText(this, "Annonce uploadée!", Toast.LENGTH_SHORT).show();
         });
 
@@ -105,18 +133,19 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
         }
     }
 
-    public void savePhoto(View view) {
+    public boolean checkAndUploadImages(View view) {
         if (bmpImg == null) {
             //Toast.makeText(this, "Image manquante", Toast.LENGTH_SHORT).show();
-            if (uri != null){
+            if (uri != null) {
                 try {
                     ImageTable img = new ImageTable();
                     InputStream iStream = getContentResolver().openInputStream(uri);
                     byte[] inputData = DataConverter.getBytes(iStream);
                     img.setImage(inputData);
                     imgDao.insert(img);
+                    return true;
                     //Toast.makeText(this, "URI SUCCEED", Toast.LENGTH_SHORT).show();
-                } catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -124,9 +153,24 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
             ImageTable img = new ImageTable();
             img.setImage(DataConverter.convertImg2ByteArray(bmpImg));
             imgDao.insert(img);
+            return true;
             //Toast.makeText(this, "BMP IMG SUCCEED", Toast.LENGTH_SHORT).show();
         }
+        return false;
+    }
 
+
+    public void saveAd(View view) {
+        boolean correct = checkAndUploadImages(view);
+        if (correct == true) {
+            // Ferme l'activité et renvoi à l'activité précédente
+            finish();
+            //AdTable adTable = new AdTable();
+            //adTable.setDateDebut(dateDebut.getText().toString());
+            //adDao.insert(adTable);
+        } else {
+            Toast.makeText(this, "Errors with the images", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

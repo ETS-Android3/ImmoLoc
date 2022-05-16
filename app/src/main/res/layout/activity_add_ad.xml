@@ -36,6 +36,7 @@
                     app:startIconDrawable="@drawable/ic_border_style_black_24dp">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/area"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
@@ -58,6 +59,7 @@
                     app:startIconDrawable="@drawable/ic_attach_money_black_24dp">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/price"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
@@ -87,7 +89,7 @@
                     android:id="@+id/add_estate_rooms"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:helperText="Chambre"
+                    app:helperText="Salon"
                     app:layout_constraintEnd_toStartOf="@id/add_estate_bathrooms"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -116,6 +118,7 @@
                     app:startIconDrawable="@drawable/ic_bathtub_24px">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/nbWaterRooms"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
@@ -130,13 +133,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_large"
-                    app:helperText="chambres"
+                    app:helperText="Chambres"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/add_estate_bathrooms"
                     app:layout_constraintTop_toTopOf="parent"
                     app:startIconDrawable="@drawable/ic_hotel_black_24dp">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/nbBedrooms"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
@@ -156,6 +160,7 @@
                 app:startIconDrawable="@drawable/ic_place_black_24dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/adresse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapWords"
@@ -181,6 +186,7 @@
                     app:startIconDrawable="@drawable/ic_place_black_24dp">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/city"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textCapWords"
@@ -204,6 +210,7 @@
                     app:startIconDrawable="@drawable/ic_place_black_24dp">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/zipCode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
@@ -291,7 +298,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:focusable="true"
-                    android:focusableInTouchMode="false"
+                    android:focusableInTouchMode="true"
                     android:inputType="none"
                     android:padding="0dp"
                     tools:text="Available" />
@@ -313,9 +320,10 @@
                     app:startIconDrawable="@drawable/ic_date_range_black_24dp">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/dateDebut"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:focusableInTouchMode="false"
+                        android:focusableInTouchMode="true"
                         android:inputType="none"
                         android:padding="0dp"
                         tools:text="22/08/2022" />
@@ -335,9 +343,10 @@
                     app:startIconDrawable="@drawable/ic_date_range_black_24dp">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/dateFin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:focusableInTouchMode="false"
+                        android:focusableInTouchMode="true"
                         android:inputType="none"
                         android:padding="0dp"
                         tools:text="08/08/2023" />
@@ -356,6 +365,7 @@
                 app:startIconDrawable="@drawable/ic_person_black_24dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/owner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapWords"
@@ -373,13 +383,14 @@
                 app:layout_constraintTop_toBottomOf="@id/add_estate_agent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/descriptionAd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top"
                     android:inputType="textMultiLine|textCapSentences"
                     android:maxLines="10"
                     android:minLines="5"
-                    android:scrollbars="vertical"/>
+                    android:scrollbars="vertical" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
