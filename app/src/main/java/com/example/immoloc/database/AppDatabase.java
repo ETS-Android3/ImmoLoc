@@ -11,12 +11,12 @@ import androidx.room.migration.AutoMigrationSpec;
 
 
 @Database(
-        version = 6,
+        version = 7,
         entities = {User.class, ImageTable.class, AdTable.class, City.class, Category.class, Message.class, Visit.class},
         autoMigrations = {
                 @AutoMigration(
                         from = 2,
-                        to = 6,
+                        to = 7,
                            spec = AppDatabase.MyAutoMigration.class
                 )
         }
@@ -42,6 +42,8 @@ public abstract class AppDatabase extends RoomDatabase {
         }
         return instance;
     }
+
+
 
     @RenameColumn(tableName = "user", fromColumnName = "id", toColumnName = "user_id")
     @RenameColumn(tableName = "image", fromColumnName = "image", toColumnName = "img")

@@ -15,6 +15,18 @@ public class DataConverter {
         return stream.toByteArray();
     }
 
+    public static byte[] imageResize(byte[] image){
+        while (image.length > 500000){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+            Bitmap resized = Bitmap.createScaledBitmap(bitmap, (int)(bitmap.getWidth()*0.8), (int)(bitmap.getHeight()*0.8), true);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            resized.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            image = stream.toByteArray();
+        }
+        return image;
+
+    }
+
     public static Bitmap convertByteArray2Img(byte [] array) {
         return BitmapFactory.decodeByteArray(array, 0, array.length);
     }

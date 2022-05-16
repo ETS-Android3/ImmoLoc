@@ -20,6 +20,9 @@ public interface UserDao {
     @Query("SELECT * FROM user WHERE email = :mail")
     User findEmail(String mail);
 
+    @Query("SELECT * FROM user WHERE id = :id")
+    User getUser(long id);
+
     @Query("SELECT * FROM user WHERE first_name LIKE :first AND " +
             "last_name LIKE :last LIMIT 1")
     User findByName(String first, String last);
@@ -43,6 +46,10 @@ public interface UserDao {
 
     @Insert
     void insert(User user);
+
+    // Insère une nouvelle image ou la modifie
+    @Query("UPDATE user SET userImg =:image WHERE id =:userid")
+    void addPicture(byte[] image ,int userid);
 
     @Delete
     void delete(User user);

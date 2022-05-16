@@ -68,6 +68,9 @@
     <string name="confirmReinitText">Changer mon mot de passe</string>
     <string name="addImg">Ajoute une image</string>
 
+    <!-- Profil page -->
+    <string name="addPhotoProfil">Ajoutez votre photo de profil</string>
+
     <string-array name="typeDeBien">
         <item>Appartement</item>
         <item>Maison</item>

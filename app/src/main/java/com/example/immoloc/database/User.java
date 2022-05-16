@@ -1,5 +1,7 @@
 package com.example.immoloc.database;
 
+import android.content.Context;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -19,12 +21,19 @@ public class User {
     public String password;
     @ColumnInfo(name = "phone")
     public String phone;
+    @ColumnInfo(name="userImg", typeAffinity = ColumnInfo.BLOB)
+    private byte[] userImg;
 
+    public static User getUser(long id, Context application){
+        return AppDatabase.getInstance(application).userDao().getUser(id);
+    }
+
+    public byte[] getUserImg() { return userImg; }
+    public void setUserImg(byte[] userImg) { this.userImg = userImg; }
 
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -32,7 +41,6 @@ public class User {
     public String getFirstName() {
         return firstName;
     }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -40,7 +48,6 @@ public class User {
     public String getLastName() {
         return lastName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -48,7 +55,6 @@ public class User {
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -56,7 +62,6 @@ public class User {
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -64,7 +69,6 @@ public class User {
     public String getPhone() {
         return phone;
     }
-
     public void setPhone(String phone) {
         this.phone = phone;
     }

@@ -78,6 +78,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         profile = findViewById(R.id.profileBtn);
         profile.setOnClickListener(v -> {
             Intent redirection = new Intent(v.getContext(), ProfileActivity.class);
+            redirection.putExtra("userId",valUserId);
             startActivity(redirection);
         });
 
@@ -105,6 +106,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
               case R.id.nav_profile:
                   Intent redirection = new Intent(this, ProfileActivity.class);
+                  redirection.putExtra("userId",valUserId);
                   startActivity(redirection);
                   //Intent intent = new Intent(this, Profile.class);
           }

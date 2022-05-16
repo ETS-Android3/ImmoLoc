@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -122,9 +121,7 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
                 startActivityForResult(i, CAMERA_INTENT);
             }
         });
-
-
-    }
+    } // fin onCreate
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -174,7 +171,6 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
     public void saveAd(View view) {
         boolean correct = checkAndUploadImages(view);
         if (correct == true) {
-            //save les champs de l'ad
 
             String getSurface = surface.getText().toString();
             String getPrix = prix.getText().toString();
@@ -186,47 +182,53 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
             String getDateFin = dateFin.getText().toString();
             String getDesc = description.getText().toString();
 
-            // prendre en compte le cas où certains champs sont vides, voire la totalité
+            // Pour faire des tests plus rapidement, après on va requérir plus de champs, voire la totalité.
+            // Et de toute façon, comme on cast les champs surface et prix en entier, on  a une exception si on
+            // ne remplit pas ces champs (ça sera une chaîne vide), donc gérer cela
+            if (getSurface.isEmpty() | getPrix.isEmpty() ) {
+                Toast.makeText(this, "Veuillez remplir au moins la surface et le prix", Toast.LENGTH_SHORT).show();
+            } else {
+                catDao = locImmoDatabase.catDao();
+                cityDao = locImmoDatabase.cityDao();
 
-            catDao = locImmoDatabase.catDao();
-            int idCat = catDao.getIdByType(getType);
-            cityDao = locImmoDatabase.cityDao();
-            int idCity = cityDao.getIdByName(getCity);
+                /* Category table */
+                Category cat = new Category();
+                cat.setCategoryType(getType);
+                catDao.insert(cat);
+                int idCat = catDao.getIdByType(getType);
 
-            /* Category table */
-            Category cat = new Category();
-            cat.setCategoryType(getType);
-            catDao.insert(cat);
+                /* City table */
+                City city = new City();
+                city.setName(getCity);
+                //city.setPopulation(2000000);
+                city.setPriceLoc(Integer.parseInt(getPrix));
+                //city.setZipCode("75000");
+                //city.setZone("07eme arrondissement");
+                //city.setDepartment("paris");
+                //city.setGeoCor("0.38,0.774");
+                cityDao.insert(city);
+                int idCity = cityDao.getIdByName(getCity);
 
-            /* City table */
-            City city = new City();
-            city.setName(getCity);
-            //city.setPopulation(2000000);
-            city.setPriceLoc(Integer.parseInt(getPrix));
-            //city.setZipCode("75000");
-            //city.setZone("07eme arrondissement");
-            //city.setDepartment("paris");
-            //city.setGeoCor("0.38,0.774");
-            cityDao.insert(city);
 
-            /* Ad table */
-            AdTable adTable = new AdTable();
-            adTable.setUserId(getUserId);
-            adTable.setCategoryId(idCat);
-            adTable.setCityId(idCity);
-            //adTable.setTitle("cc");
-            adTable.setText(getDesc);
-            //adTable.setContact("635539584"); // autofill
-            adTable.setDateDebut(getDateDebut);
-            adTable.setDateFin(getDateFin);
-            adTable.setPrice(Integer.parseInt(getPrix));
-            adTable.setSurface(Integer.parseInt(getSurface));
-            //adTable.setDateDebut(dateDebut.getText().toString());
-            adDao.insert(adTable);
+                /* Ad table */
+                AdTable adTable = new AdTable();
+                adTable.setUserId(getUserId);
+                adTable.setCategoryId(idCat);
+                adTable.setCityId(idCity);
+                //adTable.setTitle("cc");
+                adTable.setText(getDesc);
+                //adTable.setContact("635539584"); // autofill
+                adTable.setDateDebut(getDateDebut);
+                adTable.setDateFin(getDateFin);
+                adTable.setPrice(Integer.parseInt(getPrix));
+                adTable.setSurface(Integer.parseInt(getSurface));
+                adTable.setDateDebut(dateDebut.getText().toString());
+                adDao.insert(adTable);
 
-            // Ferme l'activité et renvoi à l'activité précédente
-            Toast.makeText(this, "Annonce uploadée!", Toast.LENGTH_SHORT).show();
-            finish();
+                // Ferme l'activité et renvoi à l'activité précédente
+                Toast.makeText(this, "Annonce uploadée!", Toast.LENGTH_SHORT).show();
+                finish();
+            }
         } else {
             Toast.makeText(this, "Veuillez ajouter une image", Toast.LENGTH_SHORT).show();
         }

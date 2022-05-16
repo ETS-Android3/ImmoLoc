@@ -24,13 +24,16 @@
 
         <ImageView
             android:id="@+id/blurredUserImage"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="170dp"
             android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/ic_a_louer" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/userImageCardView"
@@ -56,7 +59,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
-            android:id="@+id/nameText"
+            android:id="@+id/firstName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -66,10 +69,10 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/userImageCardView"
-            tools:text="Name" />
+             />
 
         <TextView
-            android:id="@+id/statusText"
+            android:id="@+id/lastName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -79,22 +82,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nameText"
-            tools:text="Status" />
-
-        <TextView
-            android:id="@+id/description_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:maxLength="40"
-            android:singleLine="true"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/statusText"
-            tools:text="Description" />
+            app:layout_constraintTop_toBottomOf="@id/firstName"
+             />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/statesLayout"
@@ -105,26 +94,10 @@
             android:layout_marginEnd="42dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline60">
-
-            <Button
-                android:id="@+id/removeFriendButton"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:textSize="16sp"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="gone" />
-
-            <Button
-                android:id="@+id/requestSentButton"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:enabled="false"
-                android:textSize="16sp"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="gone" />
+            app:layout_constraintTop_toBottomOf="@id/guideline60"
+            app:layout_constraintVertical_bias="0.6">
 
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -136,20 +109,34 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView6"
-                app:srcCompat="@drawable/ic_add_photo_alternate_24px"
-                android:onClick="savePhoto"/>
+                app:srcCompat="@drawable/ic_add_photo_alternate_24px" />
 
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Upload an image"
+                android:layout_marginTop="16dp"
+                android:text="@string/addPhotoProfil"
+                android:translationY="-10dp"
+                app:layout_constraintBottom_toTopOf="@+id/ajouterPhoto"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/voirMesAnnonces5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/biensimmo"
+            android:text="@string/showMyAdds"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/blurredUserImage"
+            app:layout_constraintVertical_bias="0.72" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
