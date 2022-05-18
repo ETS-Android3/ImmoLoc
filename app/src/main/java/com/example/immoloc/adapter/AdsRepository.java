@@ -22,7 +22,6 @@ public class AdsRepository {
         allAds = myAdDao.getAllAds();
     }
 
-
     LiveData<List<AdTable>> getAllAds() {
         return allAds;
     }
@@ -34,10 +33,9 @@ public class AdsRepository {
         });
     }
 
-    /*
-    void delete(Ad ad) {
+    void delete(String ad) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
-            myAdDao.deleteparticularad(ad);
+            myAdDao.deleteParticularAd(ad);
         });
-    }*/
+    }
 }

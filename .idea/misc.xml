@@ -13,6 +13,8 @@
         <entry key="app/src/main/res/drawable/custom_selector.xml" value="0.199" />
         <entry key="app/src/main/res/drawable/edit_text_round_bg.xml" value="0.199" />
         <entry key="app/src/main/res/drawable/ic_add_photo_alternate_24px.xml" value="0.3045" />
+        <entry key="app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_delete_outline_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_border_style_black_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.3045" />
         <entry key="app/src/main/res/drawable/ic_keyboard_arrow_right_24dp.xml" value="0.3045" />
@@ -23,6 +25,7 @@
         <entry key="app/src/main/res/drawable/near_btn_selector.xml" value="0.2205" />
         <entry key="app/src/main/res/layout/activity_add_ad.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_annonce.xml" value="0.1683835182250396" />
+        <entry key="app/src/main/res/layout/activity_delete_ad.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />

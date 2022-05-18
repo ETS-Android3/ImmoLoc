@@ -22,11 +22,12 @@ public AdsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 @Override
 public void onBindViewHolder(AdsViewHolder holder, int position) {
         AdTable current = getItem(position);
-        holder.bind("Prix du bien= "+String.valueOf(current.getPrice())+ "€");
+        holder.bind("Annonce n° "+current.getId()+"\n"+"Prix du bien= "+String.valueOf(current.getPrice())+
+                "€"+"\nby user:" +current.userId);
         // à continuer pour les autres champs de l'annonce, à modifier pour l'user courant
         }
 
-public static class WordDiff extends DiffUtil.ItemCallback<AdTable> {
+public static class AdDiff extends DiffUtil.ItemCallback<AdTable> {
 
         @Override
         public boolean areItemsTheSame(@NonNull AdTable oldItem, @NonNull AdTable newItem) {

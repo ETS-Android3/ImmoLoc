@@ -13,22 +13,22 @@ public class AdsViewModel extends AndroidViewModel {
 
     private AdsRepository mRepository;
 
-    private final LiveData<List<AdTable>> allWords;
+    private final LiveData<List<AdTable>> allAds;
 
     public AdsViewModel(Application application) {
         super(application);
         mRepository = new AdsRepository(application);
-        allWords = mRepository.getAllAds();
+        allAds = mRepository.getAllAds();
     }
 
     public LiveData<List<AdTable>> getAllAds() {
-        return allWords;
+        return allAds;
     }
 
     void insert(AdTable ad) {
         mRepository.insert(ad);
     }
 
-   // void delete(AdTable ad) { mRepository.delete(ad); }
+    public void delete(String ad) { mRepository.delete(ad); }
 
 }

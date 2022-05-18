@@ -72,14 +72,16 @@
     <string name="addPhotoProfil">Ajoutez votre photo de profil</string>
     <string name="showAdsText">Voici vos annonces</string>
 
+    <!-- Ad page -->
     <string-array name="typeDeBien">
         <item>Appartement</item>
         <item>Maison</item>
         <item>Villa</item>
     </string-array>
-
-
-
-
+    <!-- Delete ad page -->
+    <string name="ad_to_be_deleted_text">Entrez l\'id de l\'annonce à supprimer...</string>
+    <string name="button_delete">Supprimer</string>
+    <string name="button_delete_ad">Supprimer une annonce</string>
+    <string name="empty_not_saved">Champ vide, aucune annonce supprimée.</string>
 
 </resources>

@@ -26,4 +26,9 @@ public interface AdDao {
 
     @Delete
     void delete(AdTable adTable);
+
+    // Supprimer une annonce à partir de l'id de celle-ci
+    @Query("DELETE FROM adtable WHERE id =:ad")
+    void deleteParticularAd(String ad);
+
 }

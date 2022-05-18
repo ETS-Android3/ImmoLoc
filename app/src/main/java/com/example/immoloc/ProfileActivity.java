@@ -6,12 +6,18 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.immoloc.adapter.AdsListAdapter;
+import com.example.immoloc.adapter.AdsViewModel;
+import com.example.immoloc.adapter.DeleteAdActivity;
 import com.example.immoloc.database.AppDatabase;
 import com.example.immoloc.database.User;
 import com.example.immoloc.database.UserDao;
@@ -28,10 +34,14 @@ public class ProfileActivity extends AppCompatActivity {
     Uri uri;
     int getUserId;
     private final int GALLERY_CODE = 75;
+    public static final int DELETE_AD_ACTIVITY_REQUEST_CODE = 10;
     FloatingActionButton addPic;
+    Button deleteAd;
     TextView firstName, lastName;
 
     User user = new User();
+    private AdsViewModel mWordViewModel;
+    public Button mesAnnonces;
 
 
     @Override
@@ -41,11 +51,15 @@ public class ProfileActivity extends AppCompatActivity {
 
         imView = findViewById(R.id.userImage);
         imViewBack = findViewById(R.id.blurredUserImage);
-
         bmpImg = null;
-
         locImmoDatabase = AppDatabase.getInstance(this);
         userDao = locImmoDatabase.userDao();
+        final AdsListAdapter adapter = new AdsListAdapter(new AdsListAdapter.AdDiff());
+
+        mWordViewModel = new ViewModelProvider(this).get(AdsViewModel.class);
+        mWordViewModel.getAllAds().observe(this, words -> {
+            adapter.submitList(words);
+        });
 
         addPic = findViewById(R.id.ajouterPhoto);
         addPic.setOnClickListener(view -> {
@@ -53,6 +67,20 @@ public class ProfileActivity extends AppCompatActivity {
             iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(iGallery, GALLERY_CODE);
         });
+
+        // Au clic sur mes annonces
+        mesAnnonces = findViewById(R.id.voirMesAnnonces5);
+        mesAnnonces.setOnClickListener(view -> {
+            Intent redir = new Intent(this, MyAdsActivity.class);
+            startActivity(redir);
+        });
+
+        /*deleteAd = findViewById(R.id.deleteAdBtn);
+        deleteAd.setOnClickListener(view -> {
+            Intent redirection = new Intent(this, DeleteAdActivity.class);
+            startActivityForResult(redirection, DELETE_AD_ACTIVITY_REQUEST_CODE);
+        });*/
+
 
         /* Je récupère l'id de l'user connecté pour à partir de là extraire ses informations avec getUser()
         qui est définie dans la classe com.example.immoloc.database.User */
@@ -76,15 +104,17 @@ public class ProfileActivity extends AppCompatActivity {
 
     } // fin onCreate
 
-
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
+           /* if (requestCode == DELETE_AD_ACTIVITY_REQUEST_CODE) {
+                addViewModel.delete(data.getStringExtra(DeleteAdActivity.EXTRA_REPLY));
+                Toast.makeText(this, "annonce: "+data.getStringExtra(DeleteAdActivity.EXTRA_REPLY)+" bien supprimée.", Toast.LENGTH_SHORT).show();
+            }*/
             if (requestCode == GALLERY_CODE) {
                 uri = data.getData();
                 imView.setImageURI(data.getData());
-
                 checkAndUploadImages();
             } else {
                 Toast.makeText(this, "Bitmap is null", Toast.LENGTH_SHORT).show();
