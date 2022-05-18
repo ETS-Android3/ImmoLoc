@@ -9,6 +9,9 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.migration.AutoMigrationSpec;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 
 @Database(
         version = 7,
@@ -29,12 +32,13 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract CategoryDao catDao();
     public abstract CityDao cityDao();
 
-
     private static AppDatabase instance;
     private static final String DB_name = "immoLoc";
+    private static final int NUMBER_OF_THREADS = 4;
+    public static final ExecutorService databaseWriteExecutor =
+            Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
 
-    // Singleton pattern when instantiating an AppDatabase object.
     public static synchronized AppDatabase getInstance(Context context) {
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DB_name)

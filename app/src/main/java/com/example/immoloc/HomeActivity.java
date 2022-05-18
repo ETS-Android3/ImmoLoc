@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -112,6 +113,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
           }
           return true;
       });
+
+      // Au clic sur mes annonces
+        mesAnnonces = findViewById(R.id.voirMesAnnonces);
+        mesAnnonces.setOnClickListener(view -> {
+            Intent redir = new Intent(this, MyAdsActivity.class);
+            startActivity(redir);
+        });
 
       // Au clic sur l'ajout d'une annonce
       ajouterAnnonce = findViewById(R.id.ajouterAnnonce);

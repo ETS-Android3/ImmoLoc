@@ -1,15 +1,10 @@
 package com.example.immoloc;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.room.Room;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.TextView;
 
-import com.example.immoloc.database.AppDatabase;
 
 public class MainActivity extends AppCompatActivity {
 

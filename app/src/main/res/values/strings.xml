@@ -70,6 +70,7 @@
 
     <!-- Profil page -->
     <string name="addPhotoProfil">Ajoutez votre photo de profil</string>
+    <string name="showAdsText">Voici vos annonces</string>
 
     <string-array name="typeDeBien">
         <item>Appartement</item>
