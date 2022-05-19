@@ -1,12 +1,16 @@
 package com.example.immoloc;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
     private final int GALLERY_CODE = 75;
     public static final int DELETE_AD_ACTIVITY_REQUEST_CODE = 10;
     FloatingActionButton addPic;
-    Button deleteAd;
+    Button deleteAd, deleteMyAccount;
     TextView firstName, lastName;
 
     User user = new User();
@@ -75,6 +79,33 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(redir);
         });
 
+        // Supprimer mon compte
+        deleteMyAccount = findViewById(R.id.btnDeleteMyAcc);
+        deleteMyAccount.setOnClickListener(view -> {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+                builder.setMessage(R.string.deciderOui)
+                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            // À définir si on valide
+                            public void onClick(DialogInterface dialog, int id) {
+                                // supprimer compte d'user courant
+                                userDao.delete(user);
+                                Toast.makeText(ProfileActivity.this, "Votre compte a bien été supprimé",
+                                        Toast.LENGTH_SHORT).show();
+                                Intent supr = new Intent(ProfileActivity.this, Welcome.class);
+                                startActivity(supr);
+                            }
+                        });
+                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+        });
+
         /*deleteAd = findViewById(R.id.deleteAdBtn);
         deleteAd.setOnClickListener(view -> {
             Intent redirection = new Intent(this, DeleteAdActivity.class);
@@ -96,11 +127,12 @@ public class ProfileActivity extends AppCompatActivity {
         firstName.setText(user.getFirstName());
         lastName.setText(user.getLastName());
 
-        // On récupère l'image que l'user a déjà et on la compresse un peu
-        byte[] userImage = DataConverter.imageResize(user.getUserImg());
-        Bitmap bmp = BitmapFactory.decodeByteArray(userImage, 0, userImage.length);
-        imView.setImageBitmap(Bitmap.createScaledBitmap(bmp, 500, 500, false));
-
+        // S'il en a une, on récupère l'image de l'user et on la compresse un peu
+        if (user.getUserImg() != null) {
+            byte[] userImage = DataConverter.imageResize(user.getUserImg());
+            Bitmap bmp = BitmapFactory.decodeByteArray(userImage, 0, userImage.length);
+            imView.setImageBitmap(Bitmap.createScaledBitmap(bmp, 500, 500, false));
+        }
 
     } // fin onCreate
 

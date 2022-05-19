@@ -1,25 +1,31 @@
 package com.example.immoloc.database;
 
 import android.content.Context;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
 import androidx.room.AutoMigration;
 import androidx.room.Database;
+import androidx.room.DeleteColumn;
 import androidx.room.RenameColumn;
 import androidx.room.RenameTable;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.migration.AutoMigrationSpec;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
 @Database(
-        version = 7,
+        version = 8,
         entities = {User.class, ImageTable.class, AdTable.class, City.class, Category.class, Message.class, Visit.class},
         autoMigrations = {
                 @AutoMigration(
-                        from = 2,
-                        to = 7,
+                        from = 7,
+                        to = 8,
                            spec = AppDatabase.MyAutoMigration.class
                 )
         }
@@ -39,14 +45,17 @@ public abstract class AppDatabase extends RoomDatabase {
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
 
+
     public static synchronized AppDatabase getInstance(Context context) {
+
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DB_name)
-                    .allowMainThreadQueries().build();
+                    .allowMainThreadQueries() .fallbackToDestructiveMigration()
+                    .build();
         }
+
         return instance;
     }
-
 
 
     @RenameColumn(tableName = "user", fromColumnName = "id", toColumnName = "user_id")
@@ -55,8 +64,8 @@ public abstract class AppDatabase extends RoomDatabase {
     @RenameTable(fromTableName = "ad", toTableName = "adtable")
 
     static class MyAutoMigration implements AutoMigrationSpec {
-    }
 
+    }
 
 }
 

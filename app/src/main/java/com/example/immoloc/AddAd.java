@@ -37,7 +37,7 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
     private final int GALLERY_CODE = 1000;
     MaterialButton uploadAdd;
     Bitmap bmpImg;
-    Uri uri;
+    public Uri uri;
     ImageView imView;
     TextInputEditText surface, prix, nbWaterRooms, nbRooms, nbBedrooms, adresse,
                       ville, zipCode, owner, description, dateDebut, dateFin;
@@ -150,6 +150,7 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
                     InputStream iStream = getContentResolver().openInputStream(uri);
                     byte[] inputData = DataConverter.getBytes(iStream);
                     img.setImage(inputData);
+                   // imgDao.insertImgPath(uri.toString());
                     imgDao.insert(img);
                     return true;
                     //Toast.makeText(this, "URI SUCCEED", Toast.LENGTH_SHORT).show();

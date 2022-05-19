@@ -9,9 +9,10 @@ import androidx.room.PrimaryKey;
 public class ImageTable {
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(defaultValue = "0")
     public int id;
 
-    @ColumnInfo(name = "ad_id", index = true)
+    @ColumnInfo(name = "ad_id", index = true, defaultValue = "0")
     public int ad;
 
     @ColumnInfo(name = "name")
@@ -22,6 +23,12 @@ public class ImageTable {
 
     @ColumnInfo(name="img", typeAffinity = ColumnInfo.BLOB)
     private byte[] image;
+
+   // @ColumnInfo(name="path_img")
+    //public String pathImg;
+
+  //  public String getPathImg() { return pathImg; }
+    //public void setPathImg(String pathImg) { this.pathImg = pathImg; }
 
     public byte[] getImage() {
         return image;

@@ -68,22 +68,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/userImageCardView"
-             />
-
-        <TextView
-            android:id="@+id/lastName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:maxLength="40"
-            android:singleLine="true"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/firstName"
-             />
+            app:layout_constraintTop_toBottomOf="@id/userImageCardView" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/statesLayout"
@@ -126,6 +111,34 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
+            android:id="@+id/btnDeleteMyAcc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#ED1D1D"
+            android:drawableLeft="@drawable/ic_baseline_delete_forever_24_white"
+            android:text="@string/deleteAccount"
+            android:translationY="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.58" />
+
+        <TextView
+            android:id="@+id/lastName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:maxLength="40"
+            android:singleLine="true"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/firstName" />
+
+        <Button
             android:id="@+id/voirMesAnnonces5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -133,10 +146,10 @@
             android:text="@string/showMyAdds"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintHorizontal_bias="0.511"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/blurredUserImage"
-            app:layout_constraintVertical_bias="0.72" />
+            app:layout_constraintVertical_bias="0.735" />
 
         <Button
             android:id="@+id/deleteAdBtn"
@@ -147,6 +160,7 @@
             android:text="@string/button_delete_ad"
             app:layout_constraintBottom_toTopOf="@+id/voirMesAnnonces5"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

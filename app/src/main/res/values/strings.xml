@@ -68,9 +68,14 @@
     <string name="confirmReinitText">Changer mon mot de passe</string>
     <string name="addImg">Ajoute une image</string>
 
-    <!-- Profil page -->
+    <!-- Profile page -->
     <string name="addPhotoProfil">Ajoutez votre photo de profil</string>
     <string name="showAdsText">Voici vos annonces</string>
+    <string name="deleteAccount">Supprimer mon compte</string>
+    <string name="deciderOui">Êtes-vous sûr de vouloir supprimer votre compte?</string>
+    <string name="cancel">Annuler</string>
+    <string name="ok">Supprimer</string>
+
 
     <!-- Ad page -->
     <string-array name="typeDeBien">
