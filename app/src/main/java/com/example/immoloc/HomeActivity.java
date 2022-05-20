@@ -8,7 +8,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Lifecycle;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
@@ -22,7 +24,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public TextView search, profile, home;
     public Button mesAnnonces, ajouterAnnonce;
     String valUserName;
-    int valUserId;
+    public int valUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +49,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setHomeButtonEnabled(true);
 
         drawer = findViewById(R.id.drawer_layout);
-
         // Rendre les items du groupe cliquables
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        // Cette fois, utilisation du mécanisme de sharedpref pour envoyer l'id de l'user pour la modification d'une activité
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("TheIdOfUser", String.valueOf(valUserId));
+        editor.commit();
 
 
         // Au clic sur le bouton recherche du footer

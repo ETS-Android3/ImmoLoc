@@ -3,6 +3,7 @@ package com.example.immoloc;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -40,6 +41,8 @@ public class MyAdsActivity extends AppCompatActivity {
             Intent intent = new Intent(this, DeleteAdActivity.class);
             startActivityForResult(intent, DELETE_AD_ACTIVITY_REQUEST_CODE);
         });
+
+
     }// fin onCreate
 
         public void onActivityResult(int requestCode, int resultCode, Intent data){

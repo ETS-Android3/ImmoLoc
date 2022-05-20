@@ -61,7 +61,7 @@ public class Signup extends AppCompatActivity {
             }
             if (getEmail.isEmpty() | getPass.isEmpty() | getFn.isEmpty() | getLn.isEmpty() | getPhone.isEmpty()){
                 Toast.makeText(this, "Tous les champs sont obligatoires. Merci de les remplir", Toast.LENGTH_LONG).show();
-                Toast.makeText(this, "voir: " +getEmail + getPass + getFn +  getLn + getPhone, Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, "voir: " +getEmail + getPass + getFn +  getLn + getPhone, Toast.LENGTH_LONG).show();
 
             }
             else {

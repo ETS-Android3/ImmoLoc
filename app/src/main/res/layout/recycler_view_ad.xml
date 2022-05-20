@@ -3,19 +3,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_border"
+    android:showDividers="end"
+    android:dividerPadding="22dp"
+    android:weightSum="2"
+   >
 
-    <TextView
-        android:id="@+id/textView"
-        style="@style/ad_title"
+   <!-- pour un divider en ligne
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/darker_gray" />
+        android:layout_height="1dp"
+        android:background="@color/gray_light"
+        />-->
 
-    <ImageView
-        android:id="@+id/imgMyAds"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="80dp"
+            android:letterSpacing="0.04"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@+id/modifyAd"
+            android:layout_centerVertical="true"/>
+
+        <ImageView
+            android:id="@+id/modifyAd"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:contentDescription="@string/modify_ad"
+            android:src="@drawable/icons8_modify_58" />
+
+
+    </RelativeLayout>
 
 
 </LinearLayout>

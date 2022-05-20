@@ -88,5 +88,6 @@
     <string name="button_delete">Supprimer</string>
     <string name="button_delete_ad">Supprimer une annonce</string>
     <string name="empty_not_saved">Champ vide, aucune annonce supprimée.</string>
+    <string name="modify_ad">Modifier votre annonce</string>
 
 </resources>

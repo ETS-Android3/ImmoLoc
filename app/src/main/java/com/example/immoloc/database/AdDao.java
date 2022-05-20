@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -30,5 +31,9 @@ public interface AdDao {
     // Supprimer une annonce à partir de l'id de celle-ci
     @Query("DELETE FROM adtable WHERE id =:ad")
     void deleteParticularAd(String ad);
+
+    // Test premièrement uniquement avec ce champ
+    @Query("UPDATE adtable SET date_debut_loc=:date_deb WHERE id =:idAd")
+    void updateDateDebut(String date_deb, String idAd);
 
 }

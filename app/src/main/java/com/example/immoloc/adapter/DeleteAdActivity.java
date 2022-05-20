@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,8 +22,9 @@ public class DeleteAdActivity extends AppCompatActivity {
             setContentView(R.layout.activity_delete_ad);
             mEditWordView = findViewById(R.id.edit_word);
 
-            final Button button = findViewById(R.id.button_del);
-            button.setOnClickListener(view -> {
+            final Button deleteAdBtn = findViewById(R.id.button_del);
+            // Supprimer une annonce
+            deleteAdBtn.setOnClickListener(view -> {
                 Intent replyIntent = new Intent();
                 if (TextUtils.isEmpty(mEditWordView.getText())) {
                     setResult(RESULT_CANCELED, replyIntent);
