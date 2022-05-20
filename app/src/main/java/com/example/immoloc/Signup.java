@@ -18,11 +18,18 @@ public class Signup extends AppCompatActivity {
     AppDatabase locImmoDatabase;
     EditText email, password, firstName, lastName, phone;
     Button signup;
+    boolean pro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            Intent mIntent = getIntent();
+            pro = mIntent.getBooleanExtra("getUserTypeReg", false);
+        }
 
         // We create an instance of our database
         locImmoDatabase = AppDatabase.getInstance(this);
@@ -63,6 +70,7 @@ public class Signup extends AppCompatActivity {
                 user.setFirstName(getFn);
                 user.setLastName(getLn);
                 user.setPhone(getPhone);
+                user.setProfesional(pro);
                 userDao.insert(user);
                 Toast.makeText(this, "Votre compte vient d'être créé", Toast.LENGTH_LONG).show();
                 Intent redir = new Intent(this, Login.class);

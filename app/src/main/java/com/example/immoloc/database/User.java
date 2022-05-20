@@ -23,10 +23,15 @@ public class User {
     public String phone;
     @ColumnInfo(name="userImg", typeAffinity = ColumnInfo.BLOB)
     private byte[] userImg;
+    @ColumnInfo(name="userType", defaultValue = "false")
+    public boolean isProfesional;
 
     public static User getUser(long id, Context application){
         return AppDatabase.getInstance(application).userDao().getUser(id);
     }
+
+    public boolean isProfesional() { return isProfesional; }
+    public void setProfesional(boolean profesional) { isProfesional = profesional; }
 
     public byte[] getUserImg() { return userImg; }
     public void setUserImg(byte[] userImg) { this.userImg = userImg; }

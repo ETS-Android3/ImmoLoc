@@ -41,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
     public static final int DELETE_AD_ACTIVITY_REQUEST_CODE = 10;
     FloatingActionButton addPic;
     Button deleteAd, deleteMyAccount;
-    TextView firstName, lastName;
+    TextView firstName, lastName, statut;
 
     User user = new User();
     private AdsViewModel mWordViewModel;
@@ -132,6 +132,14 @@ public class ProfileActivity extends AppCompatActivity {
             byte[] userImage = DataConverter.imageResize(user.getUserImg());
             Bitmap bmp = BitmapFactory.decodeByteArray(userImage, 0, userImage.length);
             imView.setImageBitmap(Bitmap.createScaledBitmap(bmp, 500, 500, false));
+        }
+
+        // Affichage du type d'inscription effectué (pro ou particulier)
+        statut = findViewById(R.id.statut);
+        if (user.isProfesional()){
+            statut.setText("Statut: Profesionnel");
+        } else {
+            statut.setText("Statut: Particulier");
         }
 
     } // fin onCreate

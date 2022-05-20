@@ -20,12 +20,12 @@ import java.util.concurrent.Executors;
 
 
 @Database(
-        version = 8,
+        version = 10,
         entities = {User.class, ImageTable.class, AdTable.class, City.class, Category.class, Message.class, Visit.class},
         autoMigrations = {
                 @AutoMigration(
-                        from = 7,
-                        to = 8,
+                        from = 9,
+                        to = 10,
                            spec = AppDatabase.MyAutoMigration.class
                 )
         }
