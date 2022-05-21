@@ -10,7 +10,7 @@ LocImmo is the name of our real estate rental mobile app that runs on Android pl
 * Database : Room persistence library [^1]
 
 ### What can you do with this app ?
-This app allows you to search for real estate rentals. You can filter a wide rang of information, such as the most basics : price, square meter, start and end date of rental, place, geographic coordinates and more. <br>
+This app allows you to search for real estate rentals. You can filter a wide rang of information, such as the most basics : price, square meter, start and end date of rental, place, geographic coordinates and more. There is also a chatting feature which allow you to contact directly user on the app.<br>
 This application is designed to be easy to use, quick and with clarity for everyone.
 
 ### Functionalities developped
