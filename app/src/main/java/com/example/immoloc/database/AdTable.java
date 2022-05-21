@@ -1,5 +1,7 @@
 package com.example.immoloc.database;
 
+import android.content.Context;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -54,6 +56,10 @@ public class AdTable {
 
     @ColumnInfo(name = "area",defaultValue = "0")
     public int surface;
+
+    public static AdTable getAd(long id, Context application){
+        return AppDatabase.getInstance(application).adDao().getAd(id);
+    }
 
     public int getSurface() { return surface; }
     public void setSurface(int surface) { this.surface = surface; }

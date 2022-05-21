@@ -2,6 +2,7 @@ package com.example.immoloc;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -12,12 +13,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.immoloc.adapter.AdsListAdapter;
 import com.example.immoloc.adapter.AdsViewModel;
 import com.example.immoloc.adapter.DeleteAdActivity;
+import com.example.immoloc.database.AdDao;
+import com.example.immoloc.database.AdTable;
+import com.example.immoloc.database.AppDatabase;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyAdsActivity extends AppCompatActivity {
 
     public static final int DELETE_AD_ACTIVITY_REQUEST_CODE = 2;
     private AdsViewModel myAdsViewModel;
+    AppDatabase locImmoDatabase;
+    AdDao adDao;
+    List<AdTable> ads;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +36,13 @@ public class MyAdsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_ads);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        final AdsListAdapter adapter = new AdsListAdapter(new AdsListAdapter.AdDiff());
+
+        locImmoDatabase = AppDatabase.getInstance(this);
+        adDao = locImmoDatabase.adDao();
+
+        // Je récupère toutes les annonces pour les passer à mon adapter
+        ads = adDao.getAll();
+        final AdsListAdapter adapter = new AdsListAdapter(new AdsListAdapter.AdDiff(), ads);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -54,4 +71,5 @@ public class MyAdsActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.empty_not_saved, Toast.LENGTH_LONG).show();
             }
         }
-    }
+
+}

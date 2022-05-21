@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/drawable-hdpi/ic_border_style_black_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/rounded_rectangle_secondary.xml" value="0.228" />
+        <entry key="app/src/main/res/drawable/back_for_spinner.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/background_header.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/biensimmo.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/btn_del_acc.xml" value="0.1" />

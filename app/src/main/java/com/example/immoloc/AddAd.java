@@ -186,8 +186,10 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
             // Pour faire des tests plus rapidement, après on va requérir plus de champs, voire la totalité.
             // Et de toute façon, comme on cast les champs surface et prix en entier, on  a une exception si on
             // ne remplit pas ces champs (ça sera une chaîne vide), donc gérer cela
-            if (getSurface.isEmpty() | getPrix.isEmpty() ) {
-                Toast.makeText(this, "Veuillez remplir au moins la surface et le prix", Toast.LENGTH_SHORT).show();
+            if (getSurface.isEmpty() | getPrix.isEmpty() | getCity.isEmpty() | getDateDebut.isEmpty()
+                | getDateFin.isEmpty() | getDesc.isEmpty()) {
+                Toast.makeText(this, "Veuillez remplir au moins les champs suivants:\n-Surface\n-Prix" +
+                        "\n-Ville\n-Date début\n-Date fin\n-Description", Toast.LENGTH_LONG).show();
             } else {
                 catDao = locImmoDatabase.catDao();
                 cityDao = locImmoDatabase.cityDao();
