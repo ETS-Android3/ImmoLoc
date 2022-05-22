@@ -26,6 +26,7 @@
         <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/list_border.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/near_btn_selector.xml" value="0.2205" />
+        <entry key="app/src/main/res/drawable/selector_row.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_add_ad.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_annonce.xml" value="0.1683835182250396" />
         <entry key="app/src/main/res/layout/activity_delete_ad.xml" value="0.22" />
@@ -37,11 +38,14 @@
         <entry key="app/src/main/res/layout/activity_password_forgotten.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_real_estate_listing.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_realestate_listing.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/activity_registration_type.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_search_real_estate.xml" value="0.21" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_welcome.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/add_estate_fragment.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/content_listing.xml" value="0.1984375" />
+        <entry key="app/src/main/res/layout/content_listing_realestate.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/content_login.xml" value="0.11666666666666667" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.3328804347826087" />
@@ -53,6 +57,7 @@
         <entry key="app/src/main/res/layout/nav_footer.xml" value="0.25" />
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/recycler_view_ad.xml" value="0.1984375" />
+        <entry key="app/src/main/res/layout/recyview_list.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/type_inscription.xml" value="0.15" />
         <entry key="app/src/main/res/menu/main_menu.xml" value="0.19791666666666666" />
       </map>

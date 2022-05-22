@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,10 +26,11 @@ import java.util.List;
 public class AdsListAdapter extends ListAdapter<AdTable, AdsListAdapter.AdsViewHolder> {
 
         public ImageView imageView;
-       // SharedPreferences pref;
+        SharedPreferences pref;
         public ImageView modifyMyAd;
         public List<AdTable> myAds;
         public String[] mColors = {"#e5dcd6","#fff5ee"};
+        private int selectedPos = RecyclerView.NO_POSITION;
 
 public AdsListAdapter(@NonNull DiffUtil.ItemCallback<AdTable> diffCallback, List<AdTable> data) {
         super(diffCallback);
@@ -38,7 +40,7 @@ public AdsListAdapter(@NonNull DiffUtil.ItemCallback<AdTable> diffCallback, List
         @Override
 public AdsViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_ad, parent, false);
-               // pref = PreferenceManager.getDefaultSharedPreferences(parent.getContext());
+                pref = PreferenceManager.getDefaultSharedPreferences(parent.getContext());
                 modifyMyAd = parent.findViewById(R.id.modifyAd);
                 return new AdsViewHolder(view);
         }
@@ -48,12 +50,18 @@ public AdsViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
                 AdTable ads = myAds.get(position);
                 holder.ad = ads; // annonce courante (très important)
                 AdTable current = getItem(position);
-               /* SharedPreferences.Editor editor = pref.edit();
-                editor.putString("ad_id", String.valueOf(current.getId()));
-                editor.commit(); */
+
+               /* SharedPreferences.Editor prefsEditor = pref.edit();
+                String data = pref.getString("TheIdOfUser", null);
+                if (data == null) {
+                        modifyMyAd.setVisibility(View.INVISIBLE);
+                } */
 
                 // alterner avec les couleurs mColors le background des annonces
                 holder.itemView.setBackgroundColor(Color.parseColor(mColors[position % 2]));
+                // lorsqu'un item sera selectionné on changera le background momentanément
+                holder.itemView.setSelected(selectedPos == position);
+
                 holder.bind("Annonce n° "+current.getId()+"\n"+"Prix du bien= "+String.valueOf(current.getPrice())+
                         "€"+"\nby user:" +current.userId);
                 //holder.adItemView.setBackgroundResource(R.drawable.list_border);
@@ -78,6 +86,15 @@ public class AdsViewHolder extends RecyclerView.ViewHolder implements View.OnCli
                 modifyMyAd = itemView.findViewById(R.id.modifyAd);
                 // écouteur sur le bouton de modification (crayon)
                 modifyMyAd.setOnClickListener(this);
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                                notifyItemChanged(selectedPos);
+                                selectedPos = getLayoutPosition();
+                                notifyItemChanged(selectedPos);
+                        }
+                });
         }
 
         public void bind(String text) {
@@ -87,6 +104,9 @@ public class AdsViewHolder extends RecyclerView.ViewHolder implements View.OnCli
         // Au clic sur le bouton de modification (uniquement)
         @Override
         public void onClick(View view) {
+                notifyItemChanged(selectedPos);
+                selectedPos = getLayoutPosition();
+                notifyItemChanged(selectedPos);
                 Intent intent = new Intent(view.getContext(), ModifyAdActivity.class);
                 intent.putExtra("adId", ad.getId());
                 view.getContext().startActivity(intent);
