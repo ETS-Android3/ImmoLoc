@@ -16,6 +16,10 @@ public interface AdDao {
     @Query("SELECT * FROM adtable")
     List<AdTable> getAll();
 
+    // Avoir les annonces de l'utilisateur courant d'id "id"
+    @Query("SELECT * FROM adtable WHERE user_id =:id")
+    List<AdTable> getAdsOfUser(long id);
+
     @Query("SELECT * FROM adtable WHERE title = :inputTitle")
     AdTable getAdByTitle(String inputTitle);
 
@@ -43,7 +47,9 @@ public interface AdDao {
             " text=:desctext, price=:prix, area=:surface WHERE id =:idAd")
     void updateMyAd(String idAd, String date_deb, String date_fin, String desctext, String prix, String surface);
 
+    // Avoir une annonce courante de l'utilisateur courant
     @Query("SELECT * FROM adtable WHERE id = :id")
     AdTable getAd(long id);
+
 
 }

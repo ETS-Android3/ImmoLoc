@@ -17,6 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Index;
+
 import com.example.immoloc.ModifyAdActivity;
 import com.example.immoloc.R;
 import com.example.immoloc.database.AdTable;
@@ -47,23 +49,26 @@ public AdsViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
 
         @Override
         public void onBindViewHolder(@NonNull AdsViewHolder holder, int position) {
-                AdTable ads = myAds.get(position);
-                holder.ad = ads; // annonce courante (très important)
-                AdTable current = getItem(position);
+
+                try {
+                        AdTable ads = myAds.get(position);
+                        holder.ad = ads; // annonce courante (très important)
+                        AdTable current = getItem(position);
 
                /* SharedPreferences.Editor prefsEditor = pref.edit();
-                String data = pref.getString("TheIdOfUser", null);
-                if (data == null) {
-                        modifyMyAd.setVisibility(View.INVISIBLE);
-                } */
+                String data = pref.getString("TheIdOfUser", null);*/
 
-                // alterner avec les couleurs mColors le background des annonces
-                holder.itemView.setBackgroundColor(Color.parseColor(mColors[position % 2]));
-                // lorsqu'un item sera selectionné on changera le background momentanément
-                holder.itemView.setSelected(selectedPos == position);
 
-                holder.bind("Annonce n° "+current.getId()+"\n"+"Prix du bien= "+String.valueOf(current.getPrice())+
-                        "€"+"\nby user:" +current.userId);
+                        // alterner avec les couleurs mColors le background des annonces
+                        holder.itemView.setBackgroundColor(Color.parseColor(mColors[position % 2]));
+                        // lorsqu'un item sera selectionné on changera le background momentanément
+                        holder.itemView.setSelected(selectedPos == position);
+
+                        holder.bind("Annonce n° " + current.getId() + "\n" + "Prix du bien= " + String.valueOf(current.getPrice()) +
+                                "€" + "\nby user:" + current.userId); // à supr currentuserid
+                } catch(IndexOutOfBoundsException e){
+                        e.printStackTrace();
+                }
                 //holder.adItemView.setBackgroundResource(R.drawable.list_border);
                 //Uri uri = Uri.parse(ajtAn.uri.toString()); //pour img to path
                 // Glide.with(holder.itemView.getContext())
@@ -72,8 +77,12 @@ public AdsViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
                 // à continuer pour les autres champs de l'annonce, à modifier pour l'user courant
         }
 
+        /*@Override
+        public int getItemCount() {
+                return myAds.size();
+        }*/
 
-// CLASSE HOLDER
+        // CLASSE HOLDER
 public class AdsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
 
         public final TextView adItemView;
@@ -111,6 +120,9 @@ public class AdsViewHolder extends RecyclerView.ViewHolder implements View.OnCli
                 intent.putExtra("adId", ad.getId());
                 view.getContext().startActivity(intent);
         }
+
+
+
 
 } // fin classe AdsViewHolder
 

@@ -1,7 +1,9 @@
 package com.example.immoloc;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,6 +18,7 @@ import com.example.immoloc.adapter.DeleteAdActivity;
 import com.example.immoloc.database.AdDao;
 import com.example.immoloc.database.AdTable;
 import com.example.immoloc.database.AppDatabase;
+import com.example.immoloc.database.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -28,6 +31,7 @@ public class MyAdsActivity extends AppCompatActivity {
     AppDatabase locImmoDatabase;
     AdDao adDao;
     List<AdTable> ads;
+    long currentUserId;
 
 
     @Override
@@ -40,8 +44,16 @@ public class MyAdsActivity extends AppCompatActivity {
         locImmoDatabase = AppDatabase.getInstance(this);
         adDao = locImmoDatabase.adDao();
 
-        // Je récupère toutes les annonces pour les passer à mon adapter
-        ads = adDao.getAll();
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            Intent mIntent = getIntent();
+            currentUserId = mIntent.getIntExtra("userId", 0);
+        }
+
+        // Je récupère toutes les annonces de l'user d'id 'i' pour les passer à mon adapter
+        ads = adDao.getAdsOfUser(currentUserId);
+        //ads = adDao.getAll();
+
         final AdsListAdapter adapter = new AdsListAdapter(new AdsListAdapter.AdDiff(), ads);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -50,7 +62,6 @@ public class MyAdsActivity extends AppCompatActivity {
         myAdsViewModel.getAllAds().observe(this, ads -> {
             adapter.submitList(ads);
         });
-
 
         // Au clic sur la supression d'un mot
         FloatingActionButton fab2 = findViewById(R.id.fabb);

@@ -11,12 +11,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.immoloc.database.AdDao;
+import com.example.immoloc.database.AdTable;
+import com.example.immoloc.database.AppDatabase;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -63,7 +69,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         editor.putString("TheIdOfUser", String.valueOf(valUserId));
         editor.commit();
 
-
         // Au clic sur le bouton recherche du footer
         search = findViewById(R.id.searchBtn);
         search.setOnClickListener(v -> {
@@ -73,17 +78,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         // Au clic sur le bouton accueil du footer
         home = findViewById(R.id.homeBtn);
         home.setOnClickListener(v -> {
-            if(getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)){
-                Toast.makeText(this, "Vous êtes déjà dans la page d'accueil", Toast.LENGTH_SHORT).show();
-            } else {
-                Intent redirection = new Intent(v.getContext(), HomeActivity.class);
-                startActivity(redirection);
-            }
+            Toast.makeText(this, "Vous êtes déjà dans la page d'accueil", Toast.LENGTH_SHORT).show();
         });
         // Au clic sur le bouton profil du footer
         profile = findViewById(R.id.profileBtn);
         profile.setOnClickListener(v -> {
             Intent redirection = new Intent(v.getContext(), ProfileActivity.class);
+            redirection.putExtra("getUN",valUserName);
             redirection.putExtra("userId",valUserId);
             startActivity(redirection);
         });
@@ -123,6 +124,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         mesAnnonces = findViewById(R.id.voirMesAnnonces);
         mesAnnonces.setOnClickListener(view -> {
             Intent redir = new Intent(this, MyAdsActivity.class);
+            redir.putExtra("userId",valUserId);
             startActivity(redir);
         });
 

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.immoloc.adapter.AdsListAdapter;
@@ -45,10 +46,14 @@ public class ProfileActivity extends AppCompatActivity {
     Button deleteAd, deleteMyAccount;
     TextView firstName, lastName, statut;
     List<AdTable> ads;
+    String valUserName;
+
 
     User user = new User();
     private AdsViewModel mWordViewModel;
     public Button mesAnnonces;
+    public TextView search, profile, home;
+
 
 
     @Override
@@ -82,6 +87,7 @@ public class ProfileActivity extends AppCompatActivity {
         mesAnnonces = findViewById(R.id.voirMesAnnonces5);
         mesAnnonces.setOnClickListener(view -> {
             Intent redir = new Intent(this, MyAdsActivity.class);
+            redir.putExtra("userId",getUserId);
             startActivity(redir);
         });
 
@@ -112,6 +118,26 @@ public class ProfileActivity extends AppCompatActivity {
                 dialog.show();
         });
 
+        // Au clic sur le bouton recherche du footer
+        search = findViewById(R.id.searchBtn);
+        search.setOnClickListener(v -> {
+            Intent redirection = new Intent(v.getContext(), SearchActivity.class);
+            startActivity(redirection);
+        });
+        // Au clic sur le bouton accueil du footer
+        home = findViewById(R.id.homeBtn);
+        home.setOnClickListener(v -> {
+            Intent redirection = new Intent(v.getContext(), HomeActivity.class);
+            redirection.putExtra("getUN", valUserName);
+            startActivity(redirection);
+        });
+        // Au clic sur le bouton profil du footer
+        profile = findViewById(R.id.profileBtn);
+        profile.setOnClickListener(v -> {
+            Toast.makeText(this, "Vous êtes déjà sur votre profil", Toast.LENGTH_SHORT).show();
+        });
+
+
         /*deleteAd = findViewById(R.id.deleteAdBtn);
         deleteAd.setOnClickListener(view -> {
             Intent redirection = new Intent(this, DeleteAdActivity.class);
@@ -125,6 +151,7 @@ public class ProfileActivity extends AppCompatActivity {
         if (extras != null) {
             Intent mIntent = getIntent();
             getUserId = mIntent.getIntExtra("userId", 0);
+            valUserName = mIntent.getStringExtra("getUN");
             user = User.getUser(getUserId, this);
         }
 
