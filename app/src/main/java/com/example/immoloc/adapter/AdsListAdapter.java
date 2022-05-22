@@ -115,7 +115,6 @@ public class AdsViewHolder extends RecyclerView.ViewHolder implements View.OnCli
 } // fin classe AdsViewHolder
 
 
-
 public static class AdDiff extends DiffUtil.ItemCallback<AdTable> {
 
         @Override

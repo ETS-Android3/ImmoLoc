@@ -76,6 +76,8 @@
     <string name="cancel">Annuler</string>
     <string name="ok">Supprimer</string>
 
+    <!-- Real estate listing page -->
+    <string name="allAds">Annonces mises en ligne</string>
 
     <!-- Ad page -->
     <string-array name="typeDeBien">
@@ -83,6 +85,7 @@
         <item>Maison</item>
         <item>Villa</item>
     </string-array>
+
     <!-- Delete ad page -->
     <string name="ad_to_be_deleted_text">Entrez l\'id de l\'annonce à supprimer...</string>
     <string name="button_delete">Supprimer</string>
