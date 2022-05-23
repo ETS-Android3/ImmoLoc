@@ -97,13 +97,15 @@ public class AdsViewHolder extends RecyclerView.ViewHolder implements View.OnCli
                 // écouteur sur le bouton de modification (crayon)
                 modifyMyAd.setOnClickListener(this);
 
-                // Au clic sur un item
+                // Au clic sur un item, on veut voir les détails de l'annonce
                 itemView.setOnClickListener(view -> {
                         notifyItemChanged(selectedPos);
                         selectedPos = getLayoutPosition();
                         notifyItemChanged(selectedPos);
                         Intent redirection = new Intent(view.getContext(), DetailsAdActivity.class);
+                        // get user associated to an ad
                         redirection.putExtra("adId", ad.getId());
+                        redirection.putExtra("userId", ad.getUserId());
                         view.getContext().startActivity(redirection);
                 });
         }

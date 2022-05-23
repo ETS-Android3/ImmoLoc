@@ -13,13 +13,7 @@ public class Category {
 
     @ColumnInfo(name = "category_type")
     public String categoryType;
-
-    /* Il faudras certainement définir plus exactement
-    les valeurs possibles pour catégorie du style:
-    Studio, Duplex , F&, F2, F3 .. , maison, maison avec jardin,
-    maison mitoyenne ...
-     */
-
+    
     public int getId(){
         return id;
     }

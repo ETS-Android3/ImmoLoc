@@ -70,6 +70,13 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|center_vertical"
+                android:text="@string/typeBien" />
+
             <Spinner
                 android:id="@+id/typeBien"
                 android:layout_width="match_parent"
@@ -292,17 +299,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_large"
-                app:helperText="Status"
+                app:helperText="Titre de l'annonce"
                 app:startIconDrawable="@drawable/ic_keyboard_arrow_right_24dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/titleAd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
+                    android:hint="Entrez un titre pour votre annonce..."
                     android:inputType="none"
-                    android:padding="0dp"
-                    tools:text="Available" />
+                    android:padding="0dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -314,7 +322,7 @@
                     android:id="@+id/add_estate_date_available"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:helperText="date disponible"
+                    app:helperText="date début"
                     app:layout_constraintEnd_toStartOf="@id/add_estate_date_sold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -337,7 +345,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_large"
-                    app:helperText="date disponibilité"
+                    app:helperText="date fin"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/add_estate_date_available"
                     app:layout_constraintTop_toTopOf="parent"
@@ -462,10 +470,10 @@
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
-                android:textColor="@color/red"
-                android:text="Ajoutez au moins une photo"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="Ajoutez au maximum une photo"
+                android:textColor="@color/red" />
 
 
             <com.google.android.material.button.MaterialButton

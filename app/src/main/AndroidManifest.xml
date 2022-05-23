@@ -72,6 +72,9 @@
         <activity
             android:name=".DetailsAdActivity">
         </activity>
+        <activity
+            android:name=".MessageActivity">
+        </activity>
 
     </application>
 

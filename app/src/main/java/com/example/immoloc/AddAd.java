@@ -40,7 +40,7 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
     public Uri uri;
     ImageView imView;
     TextInputEditText surface, prix, nbWaterRooms, nbRooms, nbBedrooms, adresse,
-                      ville, zipCode, owner, description, dateDebut, dateFin;
+                      ville, zipCode, owner, description, dateDebut, dateFin, title;
     String getUserName;
     int getUserId;
     String getType; // Type d'appartement choisi avec le spinner et qui est intialisé par onItemSelected()
@@ -77,6 +77,7 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
         nbWaterRooms = findViewById(R.id.nbWaterRooms);
         nbBedrooms = findViewById(R.id.nbBedrooms);
         owner = findViewById(R.id.owner);
+        title = findViewById(R.id.titleAd);
 
         /* On récupère le nom de l'utilisateur que l'Activité HomeActivity nous a envoyé
         pour l'autofill dans le champ du formulaire adéquat. L'utilisateur pourra le modifier au choix. */
@@ -174,22 +175,25 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
         if (correct == true) {
 
             String getSurface = surface.getText().toString();
+            String codePostal = zipCode.getText().toString();
             String getPrix = prix.getText().toString();
             String getNbRooms = nbRooms.getText().toString();
             String getNbWR = nbWaterRooms.getText().toString();
+            String getNbBedrooms = nbBedrooms.getText().toString();
             String getAdr = adresse.getText().toString();
             String getCity = ville.getText().toString();
             String getDateDebut = dateDebut.getText().toString();
             String getDateFin = dateFin.getText().toString();
             String getDesc = description.getText().toString();
+            String getTitle = title.getText().toString();
 
             // Pour faire des tests plus rapidement, après on va requérir plus de champs, voire la totalité.
             // Et de toute façon, comme on cast les champs surface et prix en entier, on  a une exception si on
             // ne remplit pas ces champs (ça sera une chaîne vide), donc gérer cela
             if (getSurface.isEmpty() | getPrix.isEmpty() | getCity.isEmpty() | getDateDebut.isEmpty()
-                | getDateFin.isEmpty() | getDesc.isEmpty()) {
+                | getDateFin.isEmpty() | getDesc.isEmpty() | getTitle.isEmpty()) {
                 Toast.makeText(this, "Veuillez remplir au moins les champs suivants:\n-Surface\n-Prix" +
-                        "\n-Ville\n-Date début\n-Date fin\n-Description", Toast.LENGTH_LONG).show();
+                        "\n-Ville\n-Date début\n-Date fin\n-Description\n-Title", Toast.LENGTH_LONG).show();
             } else {
                 catDao = locImmoDatabase.catDao();
                 cityDao = locImmoDatabase.cityDao();
@@ -203,12 +207,8 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
                 /* City table */
                 City city = new City();
                 city.setName(getCity);
-                //city.setPopulation(2000000);
                 city.setPriceLoc(Integer.parseInt(getPrix));
-                //city.setZipCode("75000");
-                //city.setZone("07eme arrondissement");
-                //city.setDepartment("paris");
-                //city.setGeoCor("0.38,0.774");
+                city.setZipCode(codePostal);
                 cityDao.insert(city);
                 int idCity = cityDao.getIdByName(getCity);
 
@@ -218,14 +218,17 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
                 adTable.setUserId(getUserId);
                 adTable.setCategoryId(idCat);
                 adTable.setCityId(idCity);
-                //adTable.setTitle("cc");
+                adTable.setNbSalleDeau(getNbWR);
+                adTable.setNbChambres(getNbBedrooms);
+                adTable.setNbPieces(getNbRooms);
+                adTable.setAdresse(getAdr);
                 adTable.setText(getDesc);
-                //adTable.setContact("635539584"); // autofill
                 adTable.setDateDebut(getDateDebut);
                 adTable.setDateFin(getDateFin);
                 adTable.setPrice(Integer.parseInt(getPrix));
                 adTable.setSurface(Integer.parseInt(getSurface));
                 adTable.setDateDebut(dateDebut.getText().toString());
+                adTable.setTitle(getTitle);
                 adDao.insert(adTable);
 
                 // Ferme l'activité et renvoi à l'activité précédente

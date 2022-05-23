@@ -239,7 +239,7 @@
                             android:id="@+id/details_rooms_icon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignBottom="@id/details_rooms_data_tv"
+                            android:layout_alignBottom="@id/details_pieces"
                             android:contentDescription="image_photo"
                             app:srcCompat="@drawable/ic_weekend_black_24dp" />
 
@@ -253,7 +253,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/details_rooms_data_tv"
+                            android:id="@+id/details_pieces"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/details_rooms_tv"
@@ -268,7 +268,7 @@
                             android:id="@+id/details_bathrooms_icon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignBottom="@id/details_bathrooms_data_tv"
+                            android:layout_alignBottom="@id/details_salleDeau"
                             android:contentDescription="image_photo"
                             app:srcCompat="@drawable/ic_bathtub_24px" />
 
@@ -276,7 +276,7 @@
                             android:id="@+id/details_bathrooms_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/details_rooms_data_tv"
+                            android:layout_below="@id/details_pieces"
                             android:layout_marginStart="@dimen/default_margin"
                             android:layout_marginTop="10dp"
                             android:layout_toEndOf="@id/details_rooms_icon"
@@ -284,7 +284,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/details_bathrooms_data_tv"
+                            android:id="@+id/details_salleDeau"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/details_bathrooms_tv"
@@ -299,7 +299,7 @@
                             android:id="@+id/details_bedrooms_icon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignBottom="@id/details_bedrooms_data_tv"
+                            android:layout_alignBottom="@id/details_bedrooms"
                             android:contentDescription="image_photo"
                             app:srcCompat="@drawable/ic_hotel_black_24dp" />
 
@@ -307,7 +307,7 @@
                             android:id="@+id/details_bedrooms_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/details_bathrooms_data_tv"
+                            android:layout_below="@id/details_salleDeau"
                             android:layout_marginStart="@dimen/default_margin"
                             android:layout_marginTop="@dimen/default_margin"
                             android:layout_toEndOf="@id/details_rooms_icon"
@@ -315,7 +315,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/details_bedrooms_data_tv"
+                            android:id="@+id/details_bedrooms"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/details_bedrooms_tv"
@@ -331,7 +331,7 @@
                             android:id="@+id/details_surface_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/details_rooms_data_tv"
+                            android:layout_below="@id/details_pieces"
                             android:layout_alignParentEnd="true"
                             android:layout_marginStart="@dimen/default_margin"
                             android:layout_marginEnd="90dp"
@@ -344,12 +344,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignStart="@id/details_surface_tv"
-                            android:layout_alignBottom="@id/details_bathrooms_data_tv"
+                            android:layout_alignBottom="@id/details_salleDeau"
                             android:layout_marginStart="@dimen/default_margin"
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/details_surface_data_tv"
+                                android:id="@+id/details_surface"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/black"
@@ -420,7 +420,7 @@
                             tools:text="5 street of the moon" />
 
                         <TextView
-                            android:id="@+id/details_address_city"
+                            android:id="@+id/details_city"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/spacing_middle"
@@ -432,7 +432,7 @@
                             tools:text="Paris" />
 
                         <TextView
-                            android:id="@+id/details_address_zipcode"
+                            android:id="@+id/details_zipcode"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/spacing_middle"
@@ -440,7 +440,7 @@
                             android:text="Code Postal"
                             app:layout_constraintEnd_toStartOf="@id/details_map_static_layout"
                             app:layout_constraintStart_toEndOf="@id/details_address_icon"
-                            app:layout_constraintTop_toBottomOf="@id/details_address_city"
+                            app:layout_constraintTop_toBottomOf="@id/details_city"
                             tools:text="75000" />
 
                         <ImageView
@@ -450,7 +450,7 @@
                             android:layout_marginTop="@dimen/spacing_large"
                             android:contentDescription="image_photo"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/details_address_zipcode"
+                            app:layout_constraintTop_toBottomOf="@id/details_zipcode"
                             app:srcCompat="@drawable/ic_my_location_black_24dp" />
 
 
@@ -547,16 +547,18 @@
                                 tools:text="Hugo Maitre" />
 
                             <Button
+                                android:id="@+id/buttonContactOwner"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Contacter"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"/>
+                                app:layout_constraintEnd_toEndOf="parent" />
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <TextView
+                            android:id="@+id/details_description"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/default_margin"

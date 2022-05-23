@@ -57,6 +57,50 @@ public class AdTable {
     @ColumnInfo(name = "area",defaultValue = "0")
     public int surface;
 
+    @ColumnInfo(name="nbPieces")
+    public String nbPieces;
+
+    @ColumnInfo(name="adresse")
+    public String adresse;
+
+    @ColumnInfo(name="nbSalleDeau")
+    public String nbSalleDeau;
+
+    @ColumnInfo(name="nbChambres")
+    public String nbChambres;
+
+    public String getNbPieces() {
+        return nbPieces;
+    }
+
+    public void setNbPieces(String nbPieces) {
+        this.nbPieces = nbPieces;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getNbSalleDeau() {
+        return nbSalleDeau;
+    }
+
+    public void setNbSalleDeau(String nbSalleDeau) {
+        this.nbSalleDeau = nbSalleDeau;
+    }
+
+    public String getNbChambres() {
+        return nbChambres;
+    }
+
+    public void setNbChambres(String nbChambres) {
+        this.nbChambres = nbChambres;
+    }
+
     public static AdTable getAd(long id, Context application){
         return AppDatabase.getInstance(application).adDao().getAd(id);
     }

@@ -19,7 +19,6 @@ public interface CityDao {
     @Query("SELECT * FROM city WHERE price_loc_m2 = :price")
     City findByPrice(double price);
 
-    // à changer par la suite
     @Query("SELECT id FROM city WHERE name =:cityName")
     int getIdByName(String cityName);
 

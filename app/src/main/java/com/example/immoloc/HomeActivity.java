@@ -108,6 +108,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                   return true;
               }
               case R.id.nav_msg:
+                  Intent intent = new Intent(this, MessageActivity.class);
+                  startActivity(intent);
                   Toast.makeText(this, "Vous n'avez pas de messages", Toast.LENGTH_SHORT).show();
                   return true;
 
