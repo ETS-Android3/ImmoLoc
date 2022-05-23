@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Index;
 
+import com.example.immoloc.DetailsAdActivity;
 import com.example.immoloc.ModifyAdActivity;
 import com.example.immoloc.R;
 import com.example.immoloc.database.AdTable;
@@ -96,13 +97,14 @@ public class AdsViewHolder extends RecyclerView.ViewHolder implements View.OnCli
                 // écouteur sur le bouton de modification (crayon)
                 modifyMyAd.setOnClickListener(this);
 
-                itemView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                                notifyItemChanged(selectedPos);
-                                selectedPos = getLayoutPosition();
-                                notifyItemChanged(selectedPos);
-                        }
+                // Au clic sur un item
+                itemView.setOnClickListener(view -> {
+                        notifyItemChanged(selectedPos);
+                        selectedPos = getLayoutPosition();
+                        notifyItemChanged(selectedPos);
+                        Intent redirection = new Intent(view.getContext(), DetailsAdActivity.class);
+                        redirection.putExtra("adId", ad.getId());
+                        view.getContext().startActivity(redirection);
                 });
         }
 

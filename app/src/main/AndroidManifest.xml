@@ -69,6 +69,9 @@
         <activity
             android:name=".ModifyAdActivity">
         </activity>
+        <activity
+            android:name=".DetailsAdActivity">
+        </activity>
 
     </application>
 

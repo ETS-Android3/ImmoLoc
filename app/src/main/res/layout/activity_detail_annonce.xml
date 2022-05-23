@@ -156,6 +156,7 @@
                                 app:layout_constraintTop_toTopOf="@id/details_date_icon" />
 
                             <TextView
+                                android:id="@+id/details_date_debut"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="20dp"
@@ -195,6 +196,7 @@
                                 app:layout_constraintTop_toTopOf="@id/details_date_sold_icon" />
 
                             <TextView
+                                android:id="@+id/details_date_fin"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="20dp"
