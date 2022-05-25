@@ -1,12 +1,16 @@
 package com.example.immoloc;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarFinalValueListener;
@@ -26,8 +30,9 @@ public class SearchActivity extends AppCompatActivity {
     public CheckBox date_debut, date_fin;
     public TextInputEditText editDateDebut, editDateFin;
     public FloatingActionButton searchThisAd;
-    public String getMinPrice, getMaxPrice;
-
+    public String getMinPrice, getMaxPrice, getMinArea, getMaxArea, realEstateType;
+    public AppCompatButton house, apartment, villa;
+    public TextInputEditText city;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +67,6 @@ public class SearchActivity extends AppCompatActivity {
         final CrystalRangeSeekbar areaRangeSeekBar = findViewById(R.id.seekbar_surface);
 
         /** PRICE **/
-
         // Valeur min et max à partir des textview
         final TextView tvMinPrice = findViewById(R.id.filter_price_min);
         final TextView tvMaxPrice = findViewById(R.id.filter_price_max);
@@ -84,33 +88,71 @@ public class SearchActivity extends AppCompatActivity {
 
 
         /** AREA **/
-
         final TextView tvMinArea = findViewById(R.id.filter_surface_min);
         final TextView tvMaxArea = findViewById(R.id.filter_surface_max);
         areaRangeSeekBar.setOnRangeSeekbarChangeListener((minValue, maxValue) -> {
             tvMinArea.setText(minValue+"m²");
             tvMaxArea.setText(maxValue+"m²");
         });
-        areaRangeSeekBar.setOnRangeSeekbarFinalValueListener((minValue, maxValue) ->
-                Log.d("CRS_AREA=>", minValue + " : " + maxValue));
+        areaRangeSeekBar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
+            @Override
+            public void finalValue(Number minValue, Number maxValue) {
+                getMinArea = String.valueOf(minValue);
+                getMaxArea = String.valueOf(maxValue);
+            }
+        });
 
+        /** REAL ESTATE TYPE **/
+        apartment = findViewById(R.id.filter_apartment);
+        house = findViewById(R.id.filter_house);
+        villa = findViewById(R.id.filter_villa);
 
+        apartment.setOnClickListener(view -> {
+            realEstateType = "Appartement";
+            apartment.setBackgroundColor(Color.parseColor("#d0f55f"));
+            villa.setBackgroundResource(R.drawable.near_btn_selector);
+            house.setBackgroundResource(R.drawable.near_btn_selector);
+        });
+        house.setOnClickListener(view -> {
+            realEstateType = "Maison";
+            house.setBackgroundColor(Color.parseColor("#d0f55f"));
+            apartment.setBackgroundResource(R.drawable.near_btn_selector);
+            villa.setBackgroundResource(R.drawable.near_btn_selector);
+        });
+        villa.setOnClickListener(view -> {
+            realEstateType = "Villa";
+            villa.setBackgroundColor(Color.parseColor("#d0f55f"));
+            apartment.setBackgroundResource(R.drawable.near_btn_selector);
+            house.setBackgroundResource(R.drawable.near_btn_selector);
+        });
 
-        // envoyé  a results les champs et faire la list de adtable
 
 
         /** CHERCHER L'ANNONCE EN CLIQUANT SUR LE BOUTON **/
         searchThisAd = findViewById(R.id.searchAnAdBtn);
         searchThisAd.setOnClickListener(view -> {
-            Log.d("voirValue", "valeur min = "+getMinPrice + "valeur max = "+getMaxPrice);
-            Intent redirection = new Intent(this, ResultsSearchActivity.class);
-            redirection.putExtra("prixmin", getMinPrice);
-            redirection.putExtra("prixmax", getMaxPrice);
-            startActivity(redirection);
+
+            /**CITY**/
+            city = findViewById(R.id.ville_search);
+            String getCity = city.getText().toString();
+
+            Log.d("checking", "valuetype: "+realEstateType+"et"+getCity);
+
+            if((getMinPrice == null | getMaxPrice == null) | (getMinArea == null & getMaxArea == null)){
+                Toast.makeText(this, "Vous devez spécifier au moins une valeur minimale ou maximale pour " +
+                        "le prix et la surface", Toast.LENGTH_LONG).show();
+            } else {
+                Intent redirection = new Intent(this, ResultsSearchActivity.class);
+                redirection.putExtra("prixmin", getMinPrice);
+                redirection.putExtra("prixmax", getMaxPrice);
+                redirection.putExtra("areamin", getMinArea);
+                redirection.putExtra("areamax", getMaxArea);
+                redirection.putExtra("cityname", getCity);
+                redirection.putExtra("typeproperty", realEstateType);
+                startActivity(redirection);
+            }
         });
 
-    }
-
-
+    } // fin onCreate
 
 }

@@ -42,6 +42,7 @@ public class RealEstateListing extends AppCompatActivity {
         final RecyclerAdapter adapter = new RecyclerAdapter(new RealEstateListing.AdDiffTwo(), ads);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setItemAnimator(null);
 
 
         myAdsViewModel = new ViewModelProvider(this).get(AdsViewModel.class);

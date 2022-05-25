@@ -28,9 +28,29 @@
                 android:paddingEnd="20dp"
                 android:paddingRight="25dp">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ville"
+                    android:textColor="@color/grey_88"
+                    app:layout_constraintTop_toTopOf="@+id/city"
+                    >
+                </TextView>
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ville_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords"
+                        android:maxLength="100"
+                        android:padding="10dp"
+                        android:hint="Entrez une ville..."
+                        />
+
                 <!-- Price Range -->
 
-                <CheckBox
+                <TextView
                     android:id="@+id/filter_price_check"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -38,7 +58,6 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:textColor="@color/grey_88" />
 
-                <!-- Probleme d'affichage à resoudre -->
 
                 <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
                     android:id="@+id/seekbar_price"
@@ -53,7 +72,7 @@
                     app:right_thumb_color_pressed="@color/purple_200"
                     app:right_thumb_color="@color/secondaryColor"
                     app:left_thumb_color="@color/secondaryColor"
-                    app:max_value="10000"
+                    app:max_value="5000"
                     app:min_value="0" />
 
 
@@ -85,7 +104,7 @@
 
                 <!-- Surface Range -->
 
-                <CheckBox
+                <TextView
                     android:id="@+id/filter_surface_check"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -185,6 +204,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+
+
                     <CheckBox
                         android:id="@+id/checkBox_dateDebut"
                         android:layout_width="wrap_content"
@@ -249,6 +270,7 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
@@ -270,7 +292,7 @@
                     app:justifyContent="flex_start">
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/filter_near_train"
+                        android:id="@+id/filter_apartment"
                         android:layout_width="85dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/default_margin"
@@ -278,12 +300,13 @@
                         android:background="@drawable/near_btn_selector"
                         android:padding="2dp"
                         android:text="Appartement"
+                        android:clickable="true"
                         android:textAllCaps="false"
                         android:textColor="@color/grey_40"
                         android:textSize="12sp" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/filter_near_commerce"
+                        android:id="@+id/filter_house"
                         android:layout_width="85dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/default_margin"
@@ -296,7 +319,7 @@
                         android:textSize="12sp" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/filter_near_school"
+                        android:id="@+id/filter_villa"
                         android:layout_width="85dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/default_margin"
@@ -307,9 +330,6 @@
                         android:textAllCaps="false"
                         android:textColor="@color/grey_40"
                         android:textSize="12sp" />
-
-
-
 
 
                 </com.google.android.flexbox.FlexboxLayout>

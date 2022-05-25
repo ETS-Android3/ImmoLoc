@@ -48,9 +48,10 @@ public interface AdDao {
                     String pieces, String adr, String water_room, String nbChambres);*/
 
     // Mais avant essayer avec peu de champs voir si cela fonctionne :
-    @Query("SELECT * FROM adtable WHERE price BETWEEN :prixMin AND :prixMax")
-    List<AdTable> searchAnAd(String prixMin, String prixMax);
-    //SELECT * FROM adtable  WHERE date_debut_loc AND date_fin_loc BETWEEN :date_fin_loc AND :date_deb
+    @Query("SELECT * FROM adtable, city, category WHERE city.id = adtable.id AND adtable.id = category.id " +
+            " AND price BETWEEN :prixMin AND :prixMax AND area BETWEEN :areaMin AND :areaMax" +
+            " AND city.name =:cityName AND category_type =:catType")
+    List<AdTable> searchAnAd(String prixMin, String prixMax, String areaMin, String areaMax, String cityName, String catType);
 
     @Query("SELECT name FROM adtable, city WHERE adtable.id = city.id AND adtable.id =:ad_id")
     String getCityName(long ad_id);
