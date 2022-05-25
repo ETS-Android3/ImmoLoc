@@ -28,8 +28,9 @@
     <color name="grey_40">#999999</color>
     <color name="grey_88">#37474F</color>
 
+    <color name="red_mat">#f55a42</color>
+    <color name="red_vif">#b82109</color>
 
-    <color name="onselectedcolor">#DBE8B3</color>
 
     <color name="gray_light">#D9DCDB</color>
 
