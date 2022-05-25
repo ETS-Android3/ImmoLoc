@@ -5,20 +5,17 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Index;
-
 import com.example.immoloc.DetailsAdActivity;
 import com.example.immoloc.ModifyAdActivity;
 import com.example.immoloc.R;
@@ -48,40 +45,39 @@ public AdsViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
                 return new AdsViewHolder(view);
         }
 
-        @Override
-        public void onBindViewHolder(@NonNull AdsViewHolder holder, int position) {
+@Override
+public void onBindViewHolder(@NonNull AdsViewHolder holder, int position) {
 
-                try {
-                        AdTable ads = myAds.get(position);
-                        holder.ad = ads; // annonce courante (très important)
-                        AdTable current = getItem(position);
+        AdTable ads = myAds.get(position);
+        holder.ad = ads; // annonce courante (très important)
+        AdTable current = getItem(position);
+        holder.bind("Annonce n° " + current.getId() + "\n" + "Prix du bien= " + String.valueOf(current.getPrice()) +
+                "€" + "\nby user:" + current.userId); // à supr currentuserid
 
-               /* SharedPreferences.Editor prefsEditor = pref.edit();
-                String data = pref.getString("TheIdOfUser", null);*/
+        /* SharedPreferences.Editor prefsEditor = pref.edit();
+        String data = pref.getString("TheIdOfUser", null);*/
 
+        // alterner avec les couleurs mColors le background des annonces
+        holder.itemView.setBackgroundColor(Color.parseColor(mColors[position % 2]));
+        // lorsqu'un item sera selectionné on changera le background momentanément
+        holder.itemView.setSelected(selectedPos == position);
 
-                        // alterner avec les couleurs mColors le background des annonces
-                        holder.itemView.setBackgroundColor(Color.parseColor(mColors[position % 2]));
-                        // lorsqu'un item sera selectionné on changera le background momentanément
-                        holder.itemView.setSelected(selectedPos == position);
+        //holder.adItemView.setBackgroundResource(R.drawable.list_border);
+        //Uri uri = Uri.parse(ajtAn.uri.toString()); //pour img to path
+        // Glide.with(holder.itemView.getContext())
+        //        .load(new File(uri.getPath()))
+        //       .into(imageView);
+        // à continuer pour les autres champs de l'annonce, à modifier pour l'user courant
+}
 
-                        holder.bind("Annonce n° " + current.getId() + "\n" + "Prix du bien= " + String.valueOf(current.getPrice()) +
-                                "€" + "\nby user:" + current.userId); // à supr currentuserid
-                } catch(IndexOutOfBoundsException e){
-                        e.printStackTrace();
-                }
-                //holder.adItemView.setBackgroundResource(R.drawable.list_border);
-                //Uri uri = Uri.parse(ajtAn.uri.toString()); //pour img to path
-                // Glide.with(holder.itemView.getContext())
-                //        .load(new File(uri.getPath()))
-                //       .into(imageView);
-                // à continuer pour les autres champs de l'annonce, à modifier pour l'user courant
-        }
+@Override
+public int getItemCount() {
+        return (myAds != null) ? myAds.size() : 0;
+}
 
-        /*@Override
-        public int getItemCount() {
-                return myAds.size();
-        }*/
+public AdTable getItem(int position) {
+        return myAds.get(position);
+}
 
         // CLASSE HOLDER
 public class AdsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
@@ -92,6 +88,7 @@ public class AdsViewHolder extends RecyclerView.ViewHolder implements View.OnCli
 
         public AdsViewHolder(View itemView) {
                 super(itemView);
+
                 adItemView = itemView.findViewById(R.id.textView);
                 modifyMyAd = itemView.findViewById(R.id.modifyAd);
                 // écouteur sur le bouton de modification (crayon)
@@ -124,8 +121,6 @@ public class AdsViewHolder extends RecyclerView.ViewHolder implements View.OnCli
                 intent.putExtra("adId", ad.getId());
                 view.getContext().startActivity(intent);
         }
-
-
 
 
 } // fin classe AdsViewHolder

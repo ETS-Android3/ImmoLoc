@@ -41,6 +41,7 @@ public class MyAdsActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
 
+
         locImmoDatabase = AppDatabase.getInstance(this);
         adDao = locImmoDatabase.adDao();
 
@@ -57,6 +58,7 @@ public class MyAdsActivity extends AppCompatActivity {
         final AdsListAdapter adapter = new AdsListAdapter(new AdsListAdapter.AdDiff(), ads);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setItemAnimator(null);
 
         myAdsViewModel = new ViewModelProvider(this).get(AdsViewModel.class);
         myAdsViewModel.getAllAds().observe(this, ads -> {
