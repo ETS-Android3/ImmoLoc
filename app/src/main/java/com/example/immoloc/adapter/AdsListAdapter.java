@@ -54,9 +54,6 @@ public void onBindViewHolder(@NonNull AdsViewHolder holder, int position) {
         holder.bind("Annonce n° " + current.getId() + "\n" + "Prix du bien= " + String.valueOf(current.getPrice()) +
                 "€" + "\nby user:" + current.userId); // à supr currentuserid
 
-        /* SharedPreferences.Editor prefsEditor = pref.edit();
-        String data = pref.getString("TheIdOfUser", null);*/
-
         // alterner avec les couleurs mColors le background des annonces
         holder.itemView.setBackgroundColor(Color.parseColor(mColors[position % 2]));
         // lorsqu'un item sera selectionné on changera le background momentanément

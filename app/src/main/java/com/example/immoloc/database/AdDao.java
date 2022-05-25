@@ -29,25 +29,28 @@ public interface AdDao {
     @Query("SELECT * FROM adtable")
     LiveData<List<AdTable>> getAllAds();
 
-    @Insert
-    void insert(AdTable adTable);
-
-    @Delete
-    void delete(AdTable adTable);
-
     // Supprimer une annonce à partir de l'id de celle-ci
     @Query("DELETE FROM adtable WHERE id =:ad")
     void deleteParticularAd(String ad);
 
-    // Test premièrement uniquement avec ce champ
-    @Query("UPDATE adtable SET date_debut_loc=:date_deb WHERE id =:idAd")
-    void updateDateDebut(String date_deb, String idAd);
-
+    // Requête de modification d'une annonce
     @Query("UPDATE adtable SET date_debut_loc=:date_deb, date_fin_loc=:date_fin, " +
             " text=:desctext, price=:prix, area=:surface, nbPieces=:pieces, adresse=:adr, " +
             "nbSalleDeau=:water_room, nbChambres=:nbChambres WHERE id =:idAd")
     void updateMyAd(String idAd, String date_deb, String date_fin, String desctext, String prix, String surface,
                     String pieces, String adr, String water_room, String nbChambres);
+
+    // Requête de recherche d'une annonce
+    /*@Query("SELECT * FROM adtable WHERE date_debut_loc=:date_deb AND date_fin_loc=:date_fin AND " +
+            " text=:desctext AND price=:prix AND area=:surface AND nbPieces=:pieces AND adresse=:adr AND " +
+            "nbSalleDeau=:water_room AND nbChambres=:nbChambres") // OR
+    void searchAnAd(String idAd, String date_deb, String date_fin, String desctext, String prix, String surface,
+                    String pieces, String adr, String water_room, String nbChambres);*/
+
+    // Mais avant essayer avec peu de champs voir si cela fonctionne :
+    @Query("SELECT * FROM adtable WHERE price BETWEEN :prixMin AND :prixMax")
+    List<AdTable> searchAnAd(String prixMin, String prixMax);
+    //SELECT * FROM adtable  WHERE date_debut_loc AND date_fin_loc BETWEEN :date_fin_loc AND :date_deb
 
     @Query("SELECT name FROM adtable, city WHERE adtable.id = city.id AND adtable.id =:ad_id")
     String getCityName(long ad_id);
@@ -61,10 +64,15 @@ public interface AdDao {
     @Query("SELECT phone FROM adtable, user WHERE adtable.id = user.id AND user_id =:currentUserId")
     String getPhoneNb(long currentUserId);
 
-
     // Avoir une annonce courante de l'utilisateur courant
     @Query("SELECT * FROM adtable WHERE id = :id")
     AdTable getAd(long id);
+
+    @Insert
+    void insert(AdTable adTable);
+
+    @Delete
+    void delete(AdTable adTable);
 
 
 }

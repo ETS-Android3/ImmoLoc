@@ -75,6 +75,9 @@
         <activity
             android:name=".MessageActivity">
         </activity>
+        <activity
+            android:name=".ResultsSearchActivity">
+        </activity>
 
     </application>
 

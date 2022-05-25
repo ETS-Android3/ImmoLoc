@@ -1,23 +1,39 @@
 package com.example.immoloc;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarFinalValueListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
+import com.example.immoloc.database.AdDao;
+import com.example.immoloc.database.AdTable;
+import com.example.immoloc.database.AppDatabase;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class SearchActivity extends AppCompatActivity {
 
     public CheckBox date_debut, date_fin;
     public TextInputEditText editDateDebut, editDateFin;
+    public FloatingActionButton searchThisAd;
+    public String getMinPrice, getMaxPrice;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_real_estate);
+
 
         date_debut = findViewById(R.id.checkBox_dateDebut);
         date_fin = findViewById(R.id.checkBox_dateFin);
@@ -57,9 +73,14 @@ public class SearchActivity extends AppCompatActivity {
             tvMaxPrice.setText(maxValue+"€");
         });
 
-        // On met en place la valeur finale du listener
-        priceRangeSeekBar.setOnRangeSeekbarFinalValueListener((minValue, maxValue) ->
-                Log.d("CRS_PRICE=>", minValue + " : " + maxValue));
+        // On met en place la valeur finale du listener et on les récupère
+        priceRangeSeekBar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
+        @Override
+        public void finalValue(Number minValue, Number maxValue) {
+            getMinPrice = String.valueOf(minValue);
+            getMaxPrice = String.valueOf(maxValue);
+        }
+    });
 
 
         /** AREA **/
@@ -72,6 +93,21 @@ public class SearchActivity extends AppCompatActivity {
         });
         areaRangeSeekBar.setOnRangeSeekbarFinalValueListener((minValue, maxValue) ->
                 Log.d("CRS_AREA=>", minValue + " : " + maxValue));
+
+
+
+        // envoyé  a results les champs et faire la list de adtable
+
+
+        /** CHERCHER L'ANNONCE EN CLIQUANT SUR LE BOUTON **/
+        searchThisAd = findViewById(R.id.searchAnAdBtn);
+        searchThisAd.setOnClickListener(view -> {
+            Log.d("voirValue", "valeur min = "+getMinPrice + "valeur max = "+getMaxPrice);
+            Intent redirection = new Intent(this, ResultsSearchActivity.class);
+            redirection.putExtra("prixmin", getMinPrice);
+            redirection.putExtra("prixmax", getMaxPrice);
+            startActivity(redirection);
+        });
 
     }
 

@@ -35,12 +35,14 @@ public class RealEstateListing extends AppCompatActivity {
         locImmoDatabase = AppDatabase.getInstance(this);
         adDao = locImmoDatabase.adDao();
 
+
         // Je récupère toutes les annonces pour les passer à mon adapter
         ads = adDao.getAll();
         //final AdsListAdapter adapter = new AdsListAdapter(new AdsListAdapter.AdDiff(), ads);
         final RecyclerAdapter adapter = new RecyclerAdapter(new RealEstateListing.AdDiffTwo(), ads);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
         myAdsViewModel = new ViewModelProvider(this).get(AdsViewModel.class);
         myAdsViewModel.getAllAds().observe(this, ads -> {
@@ -50,7 +52,7 @@ public class RealEstateListing extends AppCompatActivity {
 
     }// fin onCreate
 
-    public class AdDiffTwo extends DiffUtil.ItemCallback<AdTable> {
+    public static class AdDiffTwo extends DiffUtil.ItemCallback<AdTable> {
         @Override
         public boolean areItemsTheSame(@NonNull AdTable oldItem, @NonNull AdTable newItem) {
             return oldItem == newItem;

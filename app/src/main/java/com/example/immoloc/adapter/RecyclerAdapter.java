@@ -48,6 +48,15 @@ public class RecyclerAdapter extends ListAdapter<AdTable, RecyclerAdapter.AdsVie
                 "€"+"\nby user:" +current.userId);
     }
 
+    @Override
+    public int getItemCount() {
+        return (myAds != null) ? myAds.size() : 0;
+    }
+
+    public AdTable getItem(int position) {
+        return myAds.get(position);
+    }
+
     public class AdsViewHolderRec extends RecyclerView.ViewHolder  implements View.OnClickListener{
 
         public AdTable ad;
