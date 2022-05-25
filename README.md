@@ -25,6 +25,7 @@ This application is designed to be easy to use, quick and with clarity for every
 &rarr; Open Android Studio software <br>
 &rarr; Import the project which is in the folder you runned the previous command <br>
 &rarr; Just run the project (green triangle) in your own device or with an emulator. <br>
+&rarr; or run it on your phone but you have to first unable the developper options mode <br>
 
 ### Details of our app
 
