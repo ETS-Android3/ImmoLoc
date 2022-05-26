@@ -3,6 +3,7 @@ package com.example.immoloc.adapter;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.media.Image;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -30,6 +31,7 @@ import com.example.immoloc.database.ImageTable;
 
 import java.io.File;
 import java.util.List;
+import java.util.Locale;
 
 // CLASSE ADAPTER
 public class AdsListAdapter extends ListAdapter<AdTable, AdsListAdapter.AdsViewHolder> {
@@ -40,9 +42,8 @@ public class AdsListAdapter extends ListAdapter<AdTable, AdsListAdapter.AdsViewH
         public List<ImageTable> myImgs;
         public String[] mColors = {"#e5dcd6","#fff5ee"};
         private int selectedPos = RecyclerView.NO_POSITION;
-        public byte[] myImg;
-        public ImageDao imgDao;
-        AppDatabase locImmoDatabase;
+        public ImageTable imagessecond;
+
 
         public AdsListAdapter(@NonNull DiffUtil.ItemCallback<AdTable> diffCallback, List<AdTable> data, List<ImageTable> dataimg) {
         super(diffCallback);
@@ -64,33 +65,19 @@ public void onBindViewHolder(@NonNull AdsViewHolder holder, int position) {
         AdTable ads = myAds.get(position);
         holder.ad = ads; // annonce courante (très important)
         AdTable current = getItem(position);
-        holder.bind("Annonce n° " + current.getId() + "\n" + "Prix du bien= " + String.valueOf(current.getPrice()) +
-                "€" + "\nby user:" + current.userId); // à supr currentuserid
+        holder.bind(current.getTitle().toUpperCase(Locale.ROOT)+ "\nAnnonce n° " + current.getId() +
+                "\n" + "Prix du bien= " + String.valueOf(current.getPrice()) +
+                "€" + "\nby user:" + current.userId);
 
         // alterner avec les couleurs mColors le background des annonces
         holder.itemView.setBackgroundColor(Color.parseColor(mColors[position % 2]));
         // lorsqu'un item sera selectionné on changera le background momentanément
         holder.itemView.setSelected(selectedPos == position);
 
-
-
         ImageTable images = (ImageTable) myImgs.get(position);
         holder.imageAd.setImageBitmap(DataConverter.convertByteArray2Img(images.getImage()));
-        //byte[] compressedImg = DataConverter.imageResize(images.getImage());
         images.setImage(images.getImage());
 
-
-        //holder.adItemView.setBackgroundResource(R.drawable.list_border);
-        /* Uri uri = Uri.parse(ajtAn.uri.toString()); //pour img to path
-           Glide.with(holder.itemView.getContext())
-                .load(new File(uri.getPath()))
-               .into(imageView); */
-
-          // mettre le byte[]
-       /* Glide.with(holder.itemView.getContext())
-                .load(myImg)
-                .placeholder(R.drawable.ic_home)
-                .into(holder.imageAd);*/
 }
 
 @Override
@@ -102,7 +89,7 @@ public AdTable getItem(int position) {
         return myAds.get(position);
 }
 
-        // CLASSE HOLDER
+// CLASSE HOLDER
 public class AdsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
 
         public final TextView adItemView;
@@ -113,24 +100,23 @@ public class AdsViewHolder extends RecyclerView.ViewHolder implements View.OnCli
         public AdsViewHolder(View itemView) {
                 super(itemView);
 
-                //locImmoDatabase = AppDatabase.getInstance(itemView.getContext());
-
                 imageAd = itemView.findViewById(R.id.displayImageAd);
                 adItemView = itemView.findViewById(R.id.textView);
                 modifyMyAd = itemView.findViewById(R.id.modifyAd);
                 // écouteur sur le bouton de modification (crayon)
-                modifyMyAd.setOnClickListener(this);
+                itemView.setOnClickListener(this);
+                imageAd.setOnClickListener(this);
 
-                // Au clic sur un item, on veut voir les détails de l'annonce
-                itemView.setOnClickListener(view -> {
+                // AJOUTER ÉCOUTEUR SUR L'IMAGE AUSSI (pour voir le détail de l'annonce)
+
+                // Au clic sur le crayon, on peut modifier l'annonce
+                modifyMyAd.setOnClickListener(view -> {
                         notifyItemChanged(selectedPos);
                         selectedPos = getLayoutPosition();
                         notifyItemChanged(selectedPos);
-                        Intent redirection = new Intent(view.getContext(), DetailsAdActivity.class);
-                        // get user associated to an ad
-                        redirection.putExtra("adId", ad.getId());
-                        redirection.putExtra("userId", ad.getUserId());
-                        view.getContext().startActivity(redirection);
+                        Intent intent = new Intent(view.getContext(), ModifyAdActivity.class);
+                        intent.putExtra("adId", ad.getId());
+                        view.getContext().startActivity(intent);
                 });
 }
 
@@ -138,15 +124,24 @@ public class AdsViewHolder extends RecyclerView.ViewHolder implements View.OnCli
                 adItemView.setText(text);
         }
 
-        // Au clic sur le bouton de modification (uniquement)
+        // Au clic sur un item, on veut voir les détails de l'annonce
         @Override
         public void onClick(View view) {
+
+                imagessecond = (ImageTable) myImgs.get(getAdapterPosition());
+                imagessecond.setImage(imagessecond.getImage());
+
                 notifyItemChanged(selectedPos);
                 selectedPos = getLayoutPosition();
                 notifyItemChanged(selectedPos);
-                Intent intent = new Intent(view.getContext(), ModifyAdActivity.class);
-                intent.putExtra("adId", ad.getId());
-                view.getContext().startActivity(intent);
+                Intent redirection = new Intent(view.getContext(), DetailsAdActivity.class);
+                // l'utilisateur associé à une annonce
+                redirection.putExtra("adId", ad.getId());
+                redirection.putExtra("userId", ad.getUserId());
+                redirection.putExtra("getImg", imagessecond.getImage());
+                view.getContext().startActivity(redirection);
+
+
         }
 
 

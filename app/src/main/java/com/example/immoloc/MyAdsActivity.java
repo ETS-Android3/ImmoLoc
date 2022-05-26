@@ -46,7 +46,6 @@ public class MyAdsActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
 
-
         locImmoDatabase = AppDatabase.getInstance(this);
         adDao = locImmoDatabase.adDao();
         imgDao = locImmoDatabase.imgDao();
@@ -56,6 +55,7 @@ public class MyAdsActivity extends AppCompatActivity {
             Intent mIntent = getIntent();
             currentUserId = mIntent.getIntExtra("userId", 0);
         }
+
 
         // Je récupère toutes les annonces de l'user d'id 'i' pour les passer à mon adapter
         ads = adDao.getAdsOfUser(currentUserId);
@@ -85,7 +85,7 @@ public class MyAdsActivity extends AppCompatActivity {
             super.onActivityResult(requestCode, resultCode, data);
             if (requestCode == DELETE_AD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
                 myAdsViewModel.delete(data.getStringExtra(DeleteAdActivity.EXTRA_REPLY));
-                Toast.makeText(getApplicationContext(), "Annonce supprimée", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Annonce supprimée. Revenir à cette page pour le constater", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(getApplicationContext(), R.string.empty_not_saved, Toast.LENGTH_SHORT).show();
             }

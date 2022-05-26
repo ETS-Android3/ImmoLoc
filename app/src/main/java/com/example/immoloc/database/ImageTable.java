@@ -24,12 +24,6 @@ public class ImageTable {
     @ColumnInfo(name="img", typeAffinity = ColumnInfo.BLOB)
     private byte[] image;
 
-   // @ColumnInfo(name="path_img")
-    //public String pathImg;
-
-  //  public String getPathImg() { return pathImg; }
-    //public void setPathImg(String pathImg) { this.pathImg = pathImg; }
-
     public byte[] getImage() {
         return image;
     }

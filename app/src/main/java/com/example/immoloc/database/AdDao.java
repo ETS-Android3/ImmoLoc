@@ -69,11 +69,15 @@ public interface AdDao {
     @Query("SELECT * FROM adtable WHERE id = :id")
     AdTable getAd(long id);
 
+    @Query("SELECT * FROM (SELECT first_name FROM adtable, user WHERE adtable.id = user.id AND user_id =:usrId) LIMIT 0, 1")
+    String getUserName(String usrId);
+
     @Insert
     void insert(AdTable adTable);
 
     @Delete
     void delete(AdTable adTable);
+
 
 
 }

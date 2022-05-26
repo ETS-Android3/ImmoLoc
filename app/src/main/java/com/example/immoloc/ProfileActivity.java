@@ -98,33 +98,6 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(redir);
         });
 
-        // Supprimer mon compte
-        deleteMyAccount = findViewById(R.id.btnDeleteMyAcc);
-        deleteMyAccount.setOnClickListener(view -> {
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-                builder.setMessage(R.string.deciderOui)
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            // À définir si on valide
-                            public void onClick(DialogInterface dialog, int id) {
-                                // supprimer compte d'user courant
-                                userDao.delete(user);
-                                Toast.makeText(ProfileActivity.this, "Votre compte a bien été supprimé",
-                                        Toast.LENGTH_SHORT).show();
-                                Intent supr = new Intent(ProfileActivity.this, Welcome.class);
-                                startActivity(supr);
-                            }
-                        });
-                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
-                });
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
-        });
-
         // Au clic sur le bouton recherche du footer
         search = findViewById(R.id.searchBtn);
         search.setOnClickListener(v -> {
@@ -143,13 +116,6 @@ public class ProfileActivity extends AppCompatActivity {
         profile.setOnClickListener(v -> {
             Toast.makeText(this, "Vous êtes déjà sur votre profil", Toast.LENGTH_SHORT).show();
         });
-
-
-        /*deleteAd = findViewById(R.id.deleteAdBtn);
-        deleteAd.setOnClickListener(view -> {
-            Intent redirection = new Intent(this, DeleteAdActivity.class);
-            startActivityForResult(redirection, DELETE_AD_ACTIVITY_REQUEST_CODE);
-        });*/
 
 
         /* Je récupère l'id de l'user connecté pour à partir de là extraire ses informations avec getUser()
@@ -188,10 +154,6 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-           /* if (requestCode == DELETE_AD_ACTIVITY_REQUEST_CODE) {
-                addViewModel.delete(data.getStringExtra(DeleteAdActivity.EXTRA_REPLY));
-                Toast.makeText(this, "annonce: "+data.getStringExtra(DeleteAdActivity.EXTRA_REPLY)+" bien supprimée.", Toast.LENGTH_SHORT).show();
-            }*/
             if (requestCode == GALLERY_CODE) {
                 uri = data.getData();
                 imView.setImageURI(data.getData());

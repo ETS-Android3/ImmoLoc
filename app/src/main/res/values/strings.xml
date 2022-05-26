@@ -16,6 +16,7 @@
     <string name="titlePage">Bienvenue sur ImmoLoc %1$s</string>
     <string name="btnAddAd">Ajouter une annonce</string>
     <string name="showMyAdds">Mes annonces</string>
+    <string name="textDesc">Tu peux à tout moment publier une annonce, la modifier,\nla visualiser, rechercher le bien de tes rêves et bien d\'autres choses! \nN\'hésite pas également à consulter ton profil.</string>
 
     <!-- Login page -->
     <string name="co">Connexion</string>

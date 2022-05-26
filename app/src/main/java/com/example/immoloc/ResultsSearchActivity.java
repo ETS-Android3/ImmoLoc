@@ -15,6 +15,8 @@ import com.example.immoloc.adapter.RecyclerAdapter;
 import com.example.immoloc.database.AdDao;
 import com.example.immoloc.database.AdTable;
 import com.example.immoloc.database.AppDatabase;
+import com.example.immoloc.database.ImageDao;
+import com.example.immoloc.database.ImageTable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,9 @@ public class ResultsSearchActivity extends AppCompatActivity {
     public String prixMin, prixMax, areaMin, areaMax, cityName, realEstateType;
     public AppDatabase locImmoDatabase;
     public AdDao adDao;
+    public ImageDao imgDao;
+    List<ImageTable> imgs;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +51,13 @@ public class ResultsSearchActivity extends AppCompatActivity {
 
         locImmoDatabase = AppDatabase.getInstance(this);
         adDao = locImmoDatabase.adDao();
+        imgDao = locImmoDatabase.imgDao();
+
         filteredAds = adDao.searchAnAd(prixMin, prixMax, areaMin, areaMax, cityName, realEstateType);
+        imgs = imgDao.getAllImage();
 
         // mettre le résultat de l'intent dans filteredAd.
-        final RecyclerAdapter adapter = new RecyclerAdapter(new RealEstateListing.AdDiffTwo(), filteredAds);
+        final RecyclerAdapter adapter = new RecyclerAdapter(new RealEstateListing.AdDiffTwo(), filteredAds, imgs);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(null);

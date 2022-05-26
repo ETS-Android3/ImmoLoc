@@ -16,6 +16,9 @@ import com.example.immoloc.adapter.RecyclerAdapter;
 import com.example.immoloc.database.AdDao;
 import com.example.immoloc.database.AdTable;
 import com.example.immoloc.database.AppDatabase;
+import com.example.immoloc.database.ImageDao;
+import com.example.immoloc.database.ImageTable;
+
 import java.util.List;
 
 public class RealEstateListing extends AppCompatActivity {
@@ -23,7 +26,10 @@ public class RealEstateListing extends AppCompatActivity {
     private AdsViewModel myAdsViewModel;
     AppDatabase locImmoDatabase;
     AdDao adDao;
+    ImageDao imgDao;
     List<AdTable> ads;
+    List<ImageTable> imgs;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +40,13 @@ public class RealEstateListing extends AppCompatActivity {
 
         locImmoDatabase = AppDatabase.getInstance(this);
         adDao = locImmoDatabase.adDao();
-
+        imgDao = locImmoDatabase.imgDao();
 
         // Je récupère toutes les annonces pour les passer à mon adapter
         ads = adDao.getAll();
-        //final AdsListAdapter adapter = new AdsListAdapter(new AdsListAdapter.AdDiff(), ads);
-        final RecyclerAdapter adapter = new RecyclerAdapter(new RealEstateListing.AdDiffTwo(), ads);
+        imgs = imgDao.getAllImage();
+
+        final RecyclerAdapter adapter = new RecyclerAdapter(new RealEstateListing.AdDiffTwo(), ads, imgs);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(null);

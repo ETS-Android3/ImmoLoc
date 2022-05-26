@@ -1,9 +1,11 @@
 package com.example.immoloc;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.immoloc.database.AdDao;
@@ -20,6 +22,8 @@ public class DetailsAdActivity extends AppCompatActivity {
     AdTable ad;
     String getCityName, getZipCode, getTypeDeBien;
     Button contacter;
+    ImageView displayedImg;
+    byte[] imgsent;
 
 
     @Override
@@ -33,6 +37,7 @@ public class DetailsAdActivity extends AppCompatActivity {
         if (extras != null) {
             myAdId = extras.getInt("adId");
             myUserId = extras.getInt("userId");
+            imgsent = extras.getByteArray("getImg");
         }
 
         locImmoDatabase = AppDatabase.getInstance(this);
@@ -50,6 +55,7 @@ public class DetailsAdActivity extends AppCompatActivity {
         cityName = findViewById(R.id.details_city);
         zipcode = findViewById(R.id.details_zipcode);
         typeDeBien = findViewById(R.id.details_type);
+        displayedImg = findViewById(R.id.details_image);
 
         // On remplit les détails de l'annonce
         ad = AdTable.getAd(myAdId, this); // Je récupère toutes les informations d'une annonce à partir de son id
@@ -63,6 +69,11 @@ public class DetailsAdActivity extends AppCompatActivity {
         nbBedrooms.setText(ad.getNbChambres());
         adress.setText(ad.getAdresse());
         description.setText(ad.getText());
+
+        if (imgsent != null) {
+            Bitmap new_img = DataConverter.convertByteArray2Img(imgsent);
+            displayedImg.setImageBitmap(new_img);
+        }
 
         // On récupère d'autres champs à partir de requêtes (souvent liés à d'autres tables)
         getTypeDeBien = adDao.getTypeDeBien(myAdId);

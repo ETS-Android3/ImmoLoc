@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -50,6 +51,7 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
     AdDao adDao;
     CategoryDao catDao;
     CityDao cityDao;
+    AdTable ad;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -122,6 +124,9 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
                 startActivityForResult(i, CAMERA_INTENT);
             }
         });
+
+        ad = AdTable.getAd(getUserId, this);
+
     } // fin onCreate
 
     @Override
@@ -148,10 +153,12 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
             if (uri != null) { // galerie
                 try {
                     ImageTable img = new ImageTable();
+
                     InputStream iStream = getContentResolver().openInputStream(uri);
                     byte[] inputData = DataConverter.getBytes(iStream);
                     inputData = DataConverter.imageResize(inputData); // on resize et compresse l'image avant
                     img.setImage(inputData);
+                    //img.setAd(ad.getId());
                     imgDao.insert(img);
                     return true;
                 } catch (Exception e) {

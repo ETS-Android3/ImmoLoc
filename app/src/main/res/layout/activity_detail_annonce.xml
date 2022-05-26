@@ -28,23 +28,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <androidx.viewpager.widget.ViewPager
-                        android:id="@+id/details_images_slider_vp"
+                    <ImageView
+                        android:id="@+id/details_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fitsSystemWindows="true"
-                        app:layout_collapseMode="parallax" />
-
+                        app:layout_collapseMode="parallax"/>
 
 
                 </RelativeLayout>
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/details_toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -150,7 +142,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/spacing_middle"
-                                android:text="date disponibilité"
+                                android:text="date début du bail"
                                 app:layout_constraintBottom_toBottomOf="@id/details_date_icon"
                                 app:layout_constraintStart_toEndOf="@id/details_date_icon"
                                 app:layout_constraintTop_toTopOf="@id/details_date_icon" />
@@ -190,7 +182,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/spacing_middle"
-                                android:text="durée du bail"
+                                android:text="date fin du bail"
                                 app:layout_constraintBottom_toBottomOf="@id/details_date_sold_icon"
                                 app:layout_constraintStart_toEndOf="@id/details_date_sold_icon"
                                 app:layout_constraintTop_toTopOf="@id/details_date_sold_icon" />
