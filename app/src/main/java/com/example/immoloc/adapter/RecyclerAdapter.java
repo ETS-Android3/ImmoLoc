@@ -1,5 +1,6 @@
 package com.example.immoloc.adapter;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.immoloc.DetailsAdActivity;
 import com.example.immoloc.R;
 import com.example.immoloc.database.AdTable;
 
@@ -78,6 +80,11 @@ public class RecyclerAdapter extends ListAdapter<AdTable, RecyclerAdapter.AdsVie
             notifyItemChanged(selectedPos);
             selectedPos = getLayoutPosition();
             notifyItemChanged(selectedPos);
+            Intent redirection = new Intent(view.getContext(), DetailsAdActivity.class);
+            // get user associated to an ad
+            redirection.putExtra("adId", ad.getId());
+            redirection.putExtra("userId", ad.getUserId());
+            view.getContext().startActivity(redirection);
         }
     }
 

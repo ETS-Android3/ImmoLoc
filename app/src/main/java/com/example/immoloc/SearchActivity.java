@@ -136,20 +136,27 @@ public class SearchActivity extends AppCompatActivity {
             city = findViewById(R.id.ville_search);
             String getCity = city.getText().toString();
 
-            Log.d("checking", "valuetype: "+realEstateType+"et"+getCity);
 
             if((getMinPrice == null | getMaxPrice == null) | (getMinArea == null & getMaxArea == null)){
                 Toast.makeText(this, "Vous devez spécifier au moins une valeur minimale ou maximale pour " +
-                        "le prix et la surface", Toast.LENGTH_LONG).show();
+                        "le prix et la surface.", Toast.LENGTH_LONG).show();
             } else {
-                Intent redirection = new Intent(this, ResultsSearchActivity.class);
-                redirection.putExtra("prixmin", getMinPrice);
-                redirection.putExtra("prixmax", getMaxPrice);
-                redirection.putExtra("areamin", getMinArea);
-                redirection.putExtra("areamax", getMaxArea);
-                redirection.putExtra("cityname", getCity);
-                redirection.putExtra("typeproperty", realEstateType);
-                startActivity(redirection);
+                if (realEstateType == null) {
+                    Toast.makeText(this, "Merci d'indiquer le type de bien recherché.", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (getCity == null | getCity.isEmpty()){
+                        Toast.makeText(this, "Merci d'indiquer la ville souhaitée.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent redirection = new Intent(this, ResultsSearchActivity.class);
+                        redirection.putExtra("prixmin", getMinPrice);
+                        redirection.putExtra("prixmax", getMaxPrice);
+                        redirection.putExtra("areamin", getMinArea);
+                        redirection.putExtra("areamax", getMaxArea);
+                        redirection.putExtra("cityname", getCity);
+                        redirection.putExtra("typeproperty", realEstateType);
+                        startActivity(redirection);
+                    }
+                }
             }
         });
 
