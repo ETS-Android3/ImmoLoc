@@ -11,14 +11,14 @@ public class DataConverter {
 
     public static byte[] convertImg2ByteArray(Bitmap bitmap){
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 0, stream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
         return stream.toByteArray();
     }
 
     public static byte[] imageResize(byte[] image){
         while (image.length > 500000){
             Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-            Bitmap resized = Bitmap.createScaledBitmap(bitmap, (int)(bitmap.getWidth()*0.8), (int)(bitmap.getHeight()*0.8), true);
+            Bitmap resized = Bitmap.createScaledBitmap(bitmap, (int)(bitmap.getWidth()*0.3), (int)(bitmap.getHeight()*0.3), true);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             resized.compress(Bitmap.CompressFormat.PNG, 100, stream);
             image = stream.toByteArray();
@@ -43,4 +43,7 @@ public class DataConverter {
         }
         return byteBuffer.toByteArray();
     }
+
+
+
 }

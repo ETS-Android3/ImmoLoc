@@ -2,6 +2,7 @@ package com.example.immoloc;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteBlobTooBigException;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -18,6 +19,8 @@ import com.example.immoloc.adapter.DeleteAdActivity;
 import com.example.immoloc.database.AdDao;
 import com.example.immoloc.database.AdTable;
 import com.example.immoloc.database.AppDatabase;
+import com.example.immoloc.database.ImageDao;
+import com.example.immoloc.database.ImageTable;
 import com.example.immoloc.database.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -30,7 +33,9 @@ public class MyAdsActivity extends AppCompatActivity {
     private AdsViewModel myAdsViewModel;
     AppDatabase locImmoDatabase;
     AdDao adDao;
+    ImageDao imgDao;
     List<AdTable> ads;
+    List<ImageTable> imgs;
     long currentUserId;
 
 
@@ -44,6 +49,7 @@ public class MyAdsActivity extends AppCompatActivity {
 
         locImmoDatabase = AppDatabase.getInstance(this);
         adDao = locImmoDatabase.adDao();
+        imgDao = locImmoDatabase.imgDao();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -53,9 +59,9 @@ public class MyAdsActivity extends AppCompatActivity {
 
         // Je récupère toutes les annonces de l'user d'id 'i' pour les passer à mon adapter
         ads = adDao.getAdsOfUser(currentUserId);
-        //ads = adDao.getAll();
+        imgs = imgDao.getAllImage();
 
-        final AdsListAdapter adapter = new AdsListAdapter(new AdsListAdapter.AdDiff(), ads);
+        final AdsListAdapter adapter = new AdsListAdapter(new AdsListAdapter.AdDiff(), ads, imgs);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(null);
@@ -81,7 +87,7 @@ public class MyAdsActivity extends AppCompatActivity {
                 myAdsViewModel.delete(data.getStringExtra(DeleteAdActivity.EXTRA_REPLY));
                 Toast.makeText(getApplicationContext(), "Annonce supprimée", Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(getApplicationContext(), R.string.empty_not_saved, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.empty_not_saved, Toast.LENGTH_SHORT).show();
             }
         }
 

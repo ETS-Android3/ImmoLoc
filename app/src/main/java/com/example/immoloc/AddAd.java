@@ -145,21 +145,20 @@ public class AddAd extends AppCompatActivity implements AdapterView.OnItemSelect
     public boolean checkAndUploadImages(View view) {
         if (bmpImg == null) {
             //Toast.makeText(this, "Image manquante", Toast.LENGTH_SHORT).show();
-            if (uri != null) {
+            if (uri != null) { // galerie
                 try {
                     ImageTable img = new ImageTable();
                     InputStream iStream = getContentResolver().openInputStream(uri);
                     byte[] inputData = DataConverter.getBytes(iStream);
+                    inputData = DataConverter.imageResize(inputData); // on resize et compresse l'image avant
                     img.setImage(inputData);
-                   // imgDao.insertImgPath(uri.toString());
                     imgDao.insert(img);
                     return true;
-                    //Toast.makeText(this, "URI SUCCEED", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-        } else {
+        } else { // cam
             ImageTable img = new ImageTable();
             img.setImage(DataConverter.convertImg2ByteArray(bmpImg));
             imgDao.insert(img);

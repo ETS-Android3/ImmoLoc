@@ -22,7 +22,6 @@ public class DetailsAdActivity extends AppCompatActivity {
     Button contacter;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

@@ -23,6 +23,8 @@ import com.example.immoloc.adapter.AdsViewModel;
 import com.example.immoloc.database.AdDao;
 import com.example.immoloc.database.AdTable;
 import com.example.immoloc.database.AppDatabase;
+import com.example.immoloc.database.ImageDao;
+import com.example.immoloc.database.ImageTable;
 import com.example.immoloc.database.User;
 import com.example.immoloc.database.UserDao;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -37,6 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView imView, imViewBack;
     UserDao userDao;
     AdDao adDao;
+    ImageDao imgDao;
     Bitmap bmpImg;
     Uri uri;
     int getUserId;
@@ -46,6 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
     Button deleteAd, deleteMyAccount;
     TextView firstName, lastName, statut;
     List<AdTable> ads;
+    List<ImageTable> imgs;
     String valUserName;
 
 
@@ -67,9 +71,12 @@ public class ProfileActivity extends AppCompatActivity {
         locImmoDatabase = AppDatabase.getInstance(this);
         userDao = locImmoDatabase.userDao();
         adDao = locImmoDatabase.adDao();
+        imgDao = locImmoDatabase.imgDao();
         ads = adDao.getAll();
+        imgs = imgDao.getAllImage();
 
-        final AdsListAdapter adapter = new AdsListAdapter(new AdsListAdapter.AdDiff(), ads);
+
+        final AdsListAdapter adapter = new AdsListAdapter(new AdsListAdapter.AdDiff(), ads, imgs);
 
         mWordViewModel = new ViewModelProvider(this).get(AdsViewModel.class);
         mWordViewModel.getAllAds().observe(this, words -> {

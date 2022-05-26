@@ -47,6 +47,15 @@
             android:contentDescription="@string/modify_ad"
             android:src="@drawable/icons8_modify_58" />
 
+        <ImageView
+            android:id="@+id/displayImageAd"
+            android:layout_width="100dp"
+            android:layout_height="175dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+           />
+
 
     </RelativeLayout>
 
