@@ -117,6 +117,33 @@ public class ProfileActivity extends AppCompatActivity {
             Toast.makeText(this, "Vous êtes déjà sur votre profil", Toast.LENGTH_SHORT).show();
         });
 
+        // Supprimer mon compte
+        deleteMyAccount = findViewById(R.id.btnDeleteMyAcc);
+        deleteMyAccount.setOnClickListener(view -> {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setMessage(R.string.deciderOui)
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        // À définir si on valide
+                        public void onClick(DialogInterface dialog, int id) {
+                            // supprimer compte d'user courant
+                            userDao.delete(user);
+                            Toast.makeText(ProfileActivity.this, "Votre compte a bien été supprimé",
+                                    Toast.LENGTH_SHORT).show();
+                            Intent supr = new Intent(ProfileActivity.this, Welcome.class);
+                            startActivity(supr);
+                        }
+                    });
+            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                }
+            });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        });
+
 
         /* Je récupère l'id de l'user connecté pour à partir de là extraire ses informations avec getUser()
         qui est définie dans la classe com.example.immoloc.database.User */

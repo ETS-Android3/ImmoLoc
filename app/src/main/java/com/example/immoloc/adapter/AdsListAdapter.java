@@ -2,10 +2,12 @@ package com.example.immoloc.adapter;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.media.Image;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +30,9 @@ import com.example.immoloc.database.AdTable;
 import com.example.immoloc.database.AppDatabase;
 import com.example.immoloc.database.ImageDao;
 import com.example.immoloc.database.ImageTable;
+import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.List;
 import java.util.Locale;
@@ -74,10 +78,11 @@ public void onBindViewHolder(@NonNull AdsViewHolder holder, int position) {
         // lorsqu'un item sera selectionné on changera le background momentanément
         holder.itemView.setSelected(selectedPos == position);
 
-        ImageTable images = (ImageTable) myImgs.get(position);
+        ImageTable images = myImgs.get(position);
+        holder.imgAd = images;
         holder.imageAd.setImageBitmap(DataConverter.convertByteArray2Img(images.getImage()));
         images.setImage(images.getImage());
-
+        
 }
 
 @Override
@@ -89,12 +94,14 @@ public AdTable getItem(int position) {
         return myAds.get(position);
 }
 
+
 // CLASSE HOLDER
 public class AdsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
 
         public final TextView adItemView;
         public ImageView modifyMyAd;
         AdTable ad;
+        ImageTable imgAd;
         public ImageView imageAd;
 
         public AdsViewHolder(View itemView) {
