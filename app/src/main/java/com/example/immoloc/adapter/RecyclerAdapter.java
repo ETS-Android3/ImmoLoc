@@ -20,6 +20,7 @@ import com.example.immoloc.database.AdDao;
 import com.example.immoloc.database.AdTable;
 import com.example.immoloc.database.AppDatabase;
 import com.example.immoloc.database.ImageTable;
+import com.example.immoloc.database.User;
 
 import java.util.List;
 
@@ -56,12 +57,13 @@ public class RecyclerAdapter extends ListAdapter<AdTable, RecyclerAdapter.AdsVie
         AdTable current = getItem(position);
 
         // Je récupère le nom pour pouvoir l'afficher dans le listing
-        String getUserName = adDao.getUserName(String.valueOf(current.getUserId()));
+        String getUserName = adDao.getUserName(current.getUserId());
 
         // alterner avec les couleurs mColors le background des annonces
         holder.itemView.setBackgroundColor(Color.parseColor(mColors[position % 2]));
         // lorsqu'un item sera selectionné on changera le background momentanément
         holder.itemView.setSelected(selectedPos == position);
+
         holder.bind("Annonce n° "+current.getId()+"\n"+"Prix du bien= "+String.valueOf(current.getPrice())+
                 "€"+"\nby user: " +getUserName);
 
